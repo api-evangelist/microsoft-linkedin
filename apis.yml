@@ -7,11 +7,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Social Network
-  - Professional Networking
   - Marketing
-  - Recruiting
   - Microsoft
+  - Professional Networking
+  - Recruiting
+  - Social Network
 url: https://raw.githubusercontent.com/api-evangelist/microsoft-linkedin/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-03-16'
@@ -20,8 +20,8 @@ apis:
   - aid: microsoft-linkedin:marketing-api
     name: LinkedIn Marketing API
     tags:
-      - Marketing
       - Advertising
+      - Marketing
       - Social Media
     image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.linkedin.com/v2/
@@ -38,9 +38,9 @@ apis:
   - aid: microsoft-linkedin:consumer-api
     name: LinkedIn Consumer API
     tags:
-      - Social Network
       - Profiles
       - Sharing
+      - Social Network
     image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.linkedin.com/v2/
     humanURL: https://learn.microsoft.com/en-us/linkedin/consumer/
@@ -56,9 +56,9 @@ apis:
   - aid: microsoft-linkedin:talent-solutions-api
     name: LinkedIn Talent Solutions API
     tags:
+      - HR
       - Recruiting
       - Talent
-      - HR
     image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.linkedin.com/v2/
     humanURL: https://learn.microsoft.com/en-us/linkedin/talent/
