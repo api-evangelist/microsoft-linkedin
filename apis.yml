@@ -77,11 +77,11 @@ common:
     url: https://learn.microsoft.com/en-us/linkedin/
   - type: Authentication
     url: https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication
-  - type: Rate Limits
+  - type: RateLimits
     url: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.linkedin.com/legal/l/api-terms-of-use
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.linkedin.com/legal/privacy-policy
   - type: Support
     url: https://www.linkedin.com/help/linkedin
