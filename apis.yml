@@ -71,6 +71,8 @@ apis:
       tracking systems, job posting management, candidate search, and
       recruiter workflow automation for enterprise hiring processes.
 common:
+  - type: GitHubOrganization
+    url: https://github.com/linkedin
   - type: Portal
     url: https://developer.linkedin.com/
   - type: Documentation
