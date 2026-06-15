@@ -1,0 +1,2344 @@
+{
+  "item": [
+    {
+      "id": "57d6ccbf-28f0-43e7-840f-f574a7b39143",
+      "name": "AdAccounts",
+      "description": {
+        "content": "Manage ad accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98905f3a-4f11-4f43-9ea8-ebc9d0b51a58",
+          "name": "Search ad accounts",
+          "request": {
+            "name": "Search ad accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9ba2fb0-fd74-49b0-b4dc-386a59f5eade",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"elements\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"BUSINESS\",\n      \"id\": 7544,\n      \"currency\": \"USD\",\n      \"reference\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"notifiedOnCampaignOptimization\": true,\n      \"notifiedOnCreativeApproval\": true,\n      \"notifiedOnCreativeRejection\": true,\n      \"notifiedOnEndOfCampaign\": false,\n      \"notifiedOnNewFeaturesEnabled\": true,\n      \"servingStatuses\": [\n        \"INTERNAL_HOLD\",\n        \"INTERNAL_HOLD\"\n      ],\n      \"test\": false\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"BUSINESS\",\n      \"id\": 7682,\n      \"currency\": \"USD\",\n      \"reference\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"notifiedOnCampaignOptimization\": true,\n      \"notifiedOnCreativeApproval\": false,\n      \"notifiedOnCreativeRejection\": false,\n      \"notifiedOnEndOfCampaign\": true,\n      \"notifiedOnNewFeaturesEnabled\": true,\n      \"servingStatuses\": [\n        \"ACCOUNT_TOTAL_BUDGET_HOLD\",\n        \"STOPPED\"\n      ],\n      \"test\": false\n    }\n  ],\n  \"metadata\": {\n    \"nextPageToken\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db2ef632-2685-4a55-9baa-f6f3421c7c26",
+          "name": "Create an ad account (or batch create with X-RestLi-Method header)",
+          "request": {
+            "name": "Create an ad account (or batch create with X-RestLi-Method header)",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-RestLi-Method",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<long>\",\n  \"currency\": \"USD\",\n  \"reference\": \"<string>\",\n  \"status\": \"ACTIVE\",\n  \"notifiedOnCampaignOptimization\": \"<boolean>\",\n  \"notifiedOnCreativeApproval\": \"<boolean>\",\n  \"notifiedOnCreativeRejection\": \"<boolean>\",\n  \"notifiedOnEndOfCampaign\": \"<boolean>\",\n  \"notifiedOnNewFeaturesEnabled\": \"<boolean>\",\n  \"servingStatuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"test\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab9c5d77-1831-48f1-bf8e-4d6e29db670f",
+              "name": "Created (account ID returned in x-restli-id header)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-RestLi-Method",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"type\": \"BUSINESS\",\n  \"id\": 9761,\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"notifiedOnCampaignOptimization\": true,\n  \"notifiedOnCreativeApproval\": true,\n  \"notifiedOnCreativeRejection\": true,\n  \"notifiedOnEndOfCampaign\": false,\n  \"notifiedOnNewFeaturesEnabled\": true,\n  \"servingStatuses\": [\n    \"STOPPED\",\n    \"STOPPED\"\n  ],\n  \"test\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1622049c-4b02-432e-aa54-1ec6090a4aa8",
+          "name": "Fetch an ad account",
+          "request": {
+            "name": "Fetch an ad account",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "932472d8-d941-4ab1-8e84-1fce4610719a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"BUSINESS\",\n  \"id\": 9761,\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"notifiedOnCampaignOptimization\": true,\n  \"notifiedOnCreativeApproval\": true,\n  \"notifiedOnCreativeRejection\": true,\n  \"notifiedOnEndOfCampaign\": false,\n  \"notifiedOnNewFeaturesEnabled\": true,\n  \"servingStatuses\": [\n    \"STOPPED\",\n    \"STOPPED\"\n  ],\n  \"test\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9f9d163-ed96-421d-b7d4-9f46b4a6da43",
+          "name": "Update an ad account (partial update via patch payload)",
+          "request": {
+            "name": "Update an ad account (partial update via patch payload)",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-RestLi-Method",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patch\": {\n    \"$set\": {\n      \"key_0\": 9746.817399843978\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a975b000-f9cc-434f-8065-3d2cebb36054",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-RestLi-Method",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patch\": {\n    \"$set\": {\n      \"key_0\": 8695,\n      \"key_1\": 6059\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d4ec94a-d112-46b6-bffa-bcda9b38d502",
+          "name": "Delete a DRAFT ad account",
+          "request": {
+            "name": "Delete a DRAFT ad account",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "866bef08-d53a-4fa7-bdf0-c8c3106a5d7e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "88e317f3-76af-4f5e-9330-7fdb80aa03c6",
+      "name": "AdCampaignGroups",
+      "description": {
+        "content": "Manage campaign groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8b1cf58a-b4cd-4dfc-b579-5e850de8e386",
+          "name": "Search campaign groups for an ad account",
+          "request": {
+            "name": "Search campaign groups for an ad account",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaignGroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4926ac2f-9f1a-489e-b128-58af28c6428c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaignGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "757bb25a-b6e4-4616-a2d4-531ac93bb0e9",
+          "name": "Create a campaign group",
+          "request": {
+            "name": "Create a campaign group",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaignGroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c072964b-162d-4d1e-becc-25e6e57a0ae2",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaignGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13ca848a-a2ca-4fa1-beba-7eb9b01e5956",
+          "name": "Get a campaign group",
+          "request": {
+            "name": "Get a campaign group",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaignGroups",
+                ":campaignGroupID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaignGroupID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a2967f4-c791-479b-853b-8999dc6b7bc2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaignGroups",
+                    ":campaignGroupID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignGroupID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c030cbf9-f275-4b00-ae9c-ecc304b9e198",
+          "name": "Update a campaign group (partial update)",
+          "request": {
+            "name": "Update a campaign group (partial update)",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaignGroups",
+                ":campaignGroupID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaignGroupID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-RestLi-Method",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c628ddb4-4eb8-4f9f-8d72-307a4569ff96",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaignGroups",
+                    ":campaignGroupID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignGroupID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-RestLi-Method",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "60950e3b-b0f0-44f4-aec7-6b0a1a92210d",
+      "name": "AdCampaigns",
+      "description": {
+        "content": "Manage campaigns",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d145efe-9192-4ab2-8d38-8f80dbefbc20",
+          "name": "Search campaigns under an ad account",
+          "request": {
+            "name": "Search campaigns under an ad account",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1abfa070-5986-4b58-8214-a657dc6b4c11",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "465b4b44-1846-419f-a2ac-35748fd55049",
+          "name": "Create a campaign",
+          "request": {
+            "name": "Create a campaign",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"account\": \"<string>\",\n  \"status\": \"<string>\",\n  \"type\": \"<string>\",\n  \"costType\": \"<string>\",\n  \"dailyBudget\": {\n    \"amount\": \"<string>\",\n    \"currencyCode\": \"<string>\"\n  },\n  \"associatedEntity\": \"<string>\",\n  \"audienceExpansionEnabled\": \"<boolean>\",\n  \"locale\": \"<object>\",\n  \"targetingCriteria\": \"<object>\",\n  \"test\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4fc0fd1-e894-47bf-a78b-1892f6b10911",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"account\": \"<string>\",\n  \"status\": \"<string>\",\n  \"type\": \"<string>\",\n  \"costType\": \"<string>\",\n  \"dailyBudget\": {\n    \"amount\": \"<string>\",\n    \"currencyCode\": \"<string>\"\n  },\n  \"associatedEntity\": \"<string>\",\n  \"audienceExpansionEnabled\": \"<boolean>\",\n  \"locale\": \"<object>\",\n  \"targetingCriteria\": \"<object>\",\n  \"test\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3eda59ff-eb72-4ea0-ae97-a9c20e41b056",
+          "name": "Get a campaign",
+          "request": {
+            "name": "Get a campaign",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaigns",
+                ":adCampaignID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adCampaignID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e91b7144-526e-48ed-b7ef-1ffe6dae1290",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaigns",
+                    ":adCampaignID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adCampaignID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1972,\n  \"name\": \"string\",\n  \"account\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"type\": \"TEXT_AD\",\n  \"costType\": \"CPV\",\n  \"dailyBudget\": {\n    \"amount\": \"string\",\n    \"currencyCode\": \"string\"\n  },\n  \"associatedEntity\": \"string\",\n  \"audienceExpansionEnabled\": true,\n  \"locale\": {},\n  \"targetingCriteria\": {},\n  \"test\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93c9108b-a604-4c6f-be5e-4c6a8ac5c3df",
+          "name": "Update a campaign (partial update)",
+          "request": {
+            "name": "Update a campaign (partial update)",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCampaigns",
+                ":adCampaignID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adCampaignID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "X-RestLi-Method",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b612064-9e2c-404e-9bcd-aabdb7bf458e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCampaigns",
+                    ":adCampaignID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adCampaignID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-RestLi-Method",
+                    "value": "<string>",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "072fdf72-c013-47dc-996c-6a61beb7e584",
+      "name": "AdCreatives",
+      "description": {
+        "content": "Manage creatives",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb3e6462-c094-4361-a167-f4078127ef5d",
+          "name": "Search creatives under an ad account",
+          "request": {
+            "name": "Search creatives under an ad account",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCreatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc11568d-0042-48c3-9756-bc27e087c0c8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCreatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79f7e78c-ac19-4140-8779-81a9e3ef63ee",
+          "name": "Create a creative",
+          "request": {
+            "name": "Create a creative",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCreatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73f06eec-9438-4e34-b407-b55d0d83d57d",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCreatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31acdaa2-0b5f-4c05-833d-b3a65d20e7d7",
+          "name": "Get a creative",
+          "request": {
+            "name": "Get a creative",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccounts",
+                ":adAccountID",
+                "adCreatives",
+                ":adCreativeID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adAccountID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "adCreativeID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e82bb79a-f6af-4765-98d1-360bb407e95f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccounts",
+                    ":adAccountID",
+                    "adCreatives",
+                    ":adCreativeID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adAccountID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "adCreativeID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "be9e4e11-6be4-4563-8a33-8920dd1a94bd",
+      "name": "AdAccountUsers",
+      "description": {
+        "content": "Manage ad account user permissions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c31af121-9b23-4139-b22c-4381eefc6c06",
+          "name": "Find ad account users",
+          "request": {
+            "name": "Find ad account users",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccountUsers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "accounts",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6de2dd09-fed0-458e-aa64-5fb6f3895c9a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccountUsers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accounts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.linkedin.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "rw_ads r_ads r_ads_reporting r_organization_social w_organization_social"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.linkedin.com/oauth/v2/accessToken"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.linkedin.com/oauth/v2/authorization"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4a511c8-712e-4510-854d-d6b37334cb4f",
+    "name": "LinkedIn Marketing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing LinkedIn advertising - ad accounts, ad account\nusers, ad campaign groups, ad campaigns, and ad creatives. The\nversioned API requires the Linkedin-Version header (YYYYMM format)\nand the X-Restli-Protocol-Version: 2.0.0 header for most endpoints.\nAuthentication uses an OAuth 2.0 bearer token with scopes such as\nrw_ads (read/write) or r_ads (read-only).\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

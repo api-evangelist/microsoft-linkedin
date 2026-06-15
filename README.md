@@ -1,11 +1,20 @@
 # Microsoft LinkedIn (microsoft-linkedin)
-LinkedIn provides APIs for marketing and advertising, consumer profile access, and talent solutions for recruiting and HR integration.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/microsoft-linkedin/refs/heads/main/apis.yml)
+LinkedIn, owned by Microsoft, provides APIs for accessing professional networking data, marketing and advertising capabilities, talent solutions, and consumer features including sign-in with LinkedIn.
 
-## Tags:
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/microsoft-linkedin/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/microsoft-linkedin/refs/heads/main/apis.yml)
 
- - Social Network, Marketing, Recruiting, Professional Networking
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Marketing
+- Microsoft
+- Professional Networking
+- Recruiting
+- Social Network
 
 ## Timestamps
 
@@ -15,47 +24,67 @@ LinkedIn provides APIs for marketing and advertising, consumer profile access, a
 ## APIs
 
 ### LinkedIn Marketing API
-Programmatic management of LinkedIn advertising campaigns, audience targeting, and performance reporting.
 
-**Human URL:** [https://learn.microsoft.com/en-us/linkedin/marketing/](https://learn.microsoft.com/en-us/linkedin/marketing/)
+The LinkedIn Marketing API enables programmatic management of LinkedIn advertising campaigns, audience targeting, creative assets, and performance reporting. Developers can create sponsored content, manage campaign groups, configure conversion tracking, and retrieve analytics data for marketing optimization.
 
-#### Tags:
+- **Human URL:** [https://learn.microsoft.com/en-us/linkedin/marketing/](https://learn.microsoft.com/en-us/linkedin/marketing/)
+- **Base URL:** `https://api.linkedin.com/v2/`
 
- - Marketing, Advertising, Social Media
+#### Tags
+
+- Advertising
+- Marketing
+- Social Media
 
 #### Properties
 
 - [Documentation](https://learn.microsoft.com/en-us/linkedin/marketing/)
+- [Postman Collection](collections/microsoft-linkedin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-linkedin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### LinkedIn Consumer API
-Access to member profiles, sign-in with LinkedIn, and content sharing.
 
-**Human URL:** [https://learn.microsoft.com/en-us/linkedin/consumer/](https://learn.microsoft.com/en-us/linkedin/consumer/)
+The LinkedIn Consumer API provides access to member profiles, sign-in with LinkedIn, and content sharing capabilities. Developers can implement social sign-on, retrieve basic profile information, and enable users to share content to their LinkedIn feeds from external applications.
 
-#### Tags:
+- **Human URL:** [https://learn.microsoft.com/en-us/linkedin/consumer/](https://learn.microsoft.com/en-us/linkedin/consumer/)
+- **Base URL:** `https://api.linkedin.com/v2/`
 
- - Social Network, Profiles, Sharing
+#### Tags
+
+- Profiles
+- Sharing
+- Social Network
 
 #### Properties
 
 - [Documentation](https://learn.microsoft.com/en-us/linkedin/consumer/)
+- [Postman Collection](collections/microsoft-linkedin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-linkedin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### LinkedIn Talent Solutions API
-Recruiting and talent management APIs for applicant tracking and job posting.
 
-**Human URL:** [https://learn.microsoft.com/en-us/linkedin/talent/](https://learn.microsoft.com/en-us/linkedin/talent/)
+The LinkedIn Talent Solutions API provides access to recruiting and talent management capabilities. It enables integration with applicant tracking systems, job posting management, candidate search, and recruiter workflow automation for enterprise hiring processes.
 
-#### Tags:
+- **Human URL:** [https://learn.microsoft.com/en-us/linkedin/talent/](https://learn.microsoft.com/en-us/linkedin/talent/)
+- **Base URL:** `https://api.linkedin.com/v2/`
 
- - Recruiting, Talent, HR
+#### Tags
+
+- HR
+- Recruiting
+- Talent
 
 #### Properties
 
 - [Documentation](https://learn.microsoft.com/en-us/linkedin/talent/)
+- [Postman Collection](collections/microsoft-linkedin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-linkedin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [GitHub Organization](https://github.com/linkedin)
 - [Portal](https://developer.linkedin.com/)
+- [Documentation](https://learn.microsoft.com/en-us/linkedin/)
 - [Authentication](https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication)
 - [Rate Limits](https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits)
 - [Terms of Service](https://www.linkedin.com/legal/l/api-terms-of-use)
@@ -65,5 +94,4 @@ Recruiting and talent management APIs for applicant tracking and job posting.
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com

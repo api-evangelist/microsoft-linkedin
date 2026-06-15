@@ -1,0 +1,635 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LinkedIn Marketing API",
+    "version": "202605"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.linkedin.com/oauth/v2/authorization",
+      "accessTokenUrl": "https://www.linkedin.com/oauth/v2/accessToken",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AdAccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search ad accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search ad accounts"
+        },
+        {
+          "info": {
+            "name": "Create an ad account (or batch create with X-RestLi-Method header)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              },
+              {
+                "name": "X-RestLi-Method",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an ad account (or batch create with X-RestLi-Method header)"
+        },
+        {
+          "info": {
+            "name": "Fetch an ad account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch an ad account"
+        },
+        {
+          "info": {
+            "name": "Update an ad account (partial update via patch payload)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              },
+              {
+                "name": "X-RestLi-Method",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an ad account (partial update via patch payload)"
+        },
+        {
+          "info": {
+            "name": "Delete a DRAFT ad account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a DRAFT ad account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AdCampaignGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search campaign groups for an ad account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search campaign groups for an ad account"
+        },
+        {
+          "info": {
+            "name": "Create a campaign group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a campaign group"
+        },
+        {
+          "info": {
+            "name": "Get a campaign group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups/:campaignGroupID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignGroupID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a campaign group"
+        },
+        {
+          "info": {
+            "name": "Update a campaign group (partial update)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups/:campaignGroupID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              },
+              {
+                "name": "X-RestLi-Method",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignGroupID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a campaign group (partial update)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AdCampaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search campaigns under an ad account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaigns",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search campaigns under an ad account"
+        },
+        {
+          "info": {
+            "name": "Create a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaigns",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a campaign"
+        },
+        {
+          "info": {
+            "name": "Get a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaigns/:adCampaignID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adCampaignID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a campaign"
+        },
+        {
+          "info": {
+            "name": "Update a campaign (partial update)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaigns/:adCampaignID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              },
+              {
+                "name": "X-RestLi-Method",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adCampaignID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a campaign (partial update)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AdCreatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search creatives under an ad account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCreatives",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search creatives under an ad account"
+        },
+        {
+          "info": {
+            "name": "Create a creative",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCreatives",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a creative"
+        },
+        {
+          "info": {
+            "name": "Get a creative",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCreatives/:adCreativeID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adCreativeID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a creative"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AdAccountUsers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find ad account users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccountUsers",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accounts",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Find ad account users"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
