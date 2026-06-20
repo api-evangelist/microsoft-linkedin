@@ -5,7 +5,7 @@ description: >-
   networking data, marketing and advertising capabilities, talent solutions,
   and consumer features including sign-in with LinkedIn.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Marketing
   - Microsoft
@@ -23,7 +23,7 @@ apis:
       - Advertising
       - Marketing
       - Social Media
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.linkedin.com/v2/
     humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
     properties:
@@ -41,7 +41,7 @@ apis:
       - Profiles
       - Sharing
       - Social Network
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.linkedin.com/v2/
     humanURL: https://learn.microsoft.com/en-us/linkedin/consumer/
     properties:
@@ -59,7 +59,7 @@ apis:
       - HR
       - Recruiting
       - Talent
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.linkedin.com/v2/
     humanURL: https://learn.microsoft.com/en-us/linkedin/talent/
     properties:
