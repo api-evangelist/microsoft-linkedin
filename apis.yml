@@ -71,6 +71,12 @@ apis:
       tracking systems, job posting management, candidate search, and
       recruiter workflow automation for enterprise hiring processes.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/microsoft-linkedin-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/microsoft-linkedin-domain-security.yml
+  - type: Authentication
+    url: authentication/microsoft-linkedin-authentication.yml
   - type: OAuthScopes
     url: scopes/microsoft-linkedin-scopes.yml
   - type: GitHubOrganization
