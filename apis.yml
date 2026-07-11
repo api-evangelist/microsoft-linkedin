@@ -71,6 +71,8 @@ apis:
       tracking systems, job posting management, candidate search, and
       recruiter workflow automation for enterprise hiring processes.
 common:
+  - type: OAuthScopes
+    url: scopes/microsoft-linkedin-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/linkedin
   - type: Portal

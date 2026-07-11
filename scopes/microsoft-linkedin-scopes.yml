@@ -1,0 +1,42 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/microsoft-linkedin-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/microsoft-linkedin-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.linkedin.com/oauth/v2/authorization
+    tokenUrl: https://www.linkedin.com/oauth/v2/accessToken
+  description: LinkedIn OAuth 2.0 (3-legged or 2-legged)
+scopes:
+- scope: r_ads
+  description: Read LinkedIn ads data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-linkedin-openapi.yml
+- scope: r_ads_reporting
+  description: Read LinkedIn ads reporting
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-linkedin-openapi.yml
+- scope: r_organization_social
+  description: Read organization social actions
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-linkedin-openapi.yml
+- scope: rw_ads
+  description: Read and write LinkedIn ads data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-linkedin-openapi.yml
+- scope: w_organization_social
+  description: Write organization social actions
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-linkedin-openapi.yml
