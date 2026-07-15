@@ -71,6 +71,8 @@ apis:
       tracking systems, job posting management, candidate search, and
       recruiter workflow automation for enterprise hiring processes.
 common:
+  - type: AgenticAccess
+    url: agentic-access/microsoft-linkedin-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/microsoft-linkedin-vulnerability-disclosure.yml
   - type: DomainSecurity
