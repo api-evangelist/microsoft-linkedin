@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: LinkedIn Marketing AdAccounts AdAccountUsers API
+  description: 'REST API for managing LinkedIn advertising - ad accounts, ad account
+
+    users, ad campaign groups, ad campaigns, and ad creatives. The
+
+    versioned API requires the Linkedin-Version header (YYYYMM format)
+
+    and the X-Restli-Protocol-Version: 2.0.0 header for most endpoints.
+
+    Authentication uses an OAuth 2.0 bearer token with scopes such as
+
+    rw_ads (read/write) or r_ads (read-only).
+
+    '
+  version: '202605'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: LinkedIn API Terms of Use
+    url: https://www.linkedin.com/legal/l/api-terms-of-use
+servers:
+- url: https://api.linkedin.com
+  description: LinkedIn API production
+security:
+- oauth2:
+  - rw_ads
+tags:
+- name: AdAccountUsers
+  description: Manage ad account user permissions
+paths:
+  /rest/adAccountUsers:
+    get:
+      tags:
+      - AdAccountUsers
+      summary: Find ad account users
+      operationId: adAccountUsers_find
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - accounts
+      - name: accounts
+        in: query
+        schema:
+          type: string
+          description: Sponsored account URN, e.g. urn:li:sponsoredAccount:{id}
+      - $ref: '#/components/parameters/linkedinVersion'
+      - $ref: '#/components/parameters/restliProtocol'
+      responses:
+        '200':
+          description: OK
+components:
+  parameters:
+    linkedinVersion:
+      name: Linkedin-Version
+      in: header
+      required: true
+      description: LinkedIn API version in YYYYMM format
+      schema:
+        type: string
+        example: '202605'
+    restliProtocol:
+      name: X-Restli-Protocol-Version
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - 2.0.0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: LinkedIn OAuth 2.0 (3-legged or 2-legged)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.linkedin.com/oauth/v2/authorization
+          tokenUrl: https://www.linkedin.com/oauth/v2/accessToken
+          scopes:
+            rw_ads: Read and write LinkedIn ads data
+            r_ads: Read LinkedIn ads data
+            r_ads_reporting: Read LinkedIn ads reporting
+            r_organization_social: Read organization social actions
+            w_organization_social: Write organization social actions

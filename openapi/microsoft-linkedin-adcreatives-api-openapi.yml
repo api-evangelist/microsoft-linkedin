@@ -1,0 +1,126 @@
+openapi: 3.1.0
+info:
+  title: LinkedIn Marketing AdAccounts AdCreatives API
+  description: 'REST API for managing LinkedIn advertising - ad accounts, ad account
+
+    users, ad campaign groups, ad campaigns, and ad creatives. The
+
+    versioned API requires the Linkedin-Version header (YYYYMM format)
+
+    and the X-Restli-Protocol-Version: 2.0.0 header for most endpoints.
+
+    Authentication uses an OAuth 2.0 bearer token with scopes such as
+
+    rw_ads (read/write) or r_ads (read-only).
+
+    '
+  version: '202605'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: LinkedIn API Terms of Use
+    url: https://www.linkedin.com/legal/l/api-terms-of-use
+servers:
+- url: https://api.linkedin.com
+  description: LinkedIn API production
+security:
+- oauth2:
+  - rw_ads
+tags:
+- name: AdCreatives
+  description: Manage creatives
+paths:
+  /rest/adAccounts/{adAccountID}/adCreatives:
+    get:
+      tags:
+      - AdCreatives
+      summary: Search creatives under an ad account
+      operationId: adCreatives_search
+      parameters:
+      - $ref: '#/components/parameters/adAccountID'
+      - name: q
+        in: query
+        schema:
+          type: string
+          enum:
+          - search
+      - $ref: '#/components/parameters/linkedinVersion'
+      - $ref: '#/components/parameters/restliProtocol'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - AdCreatives
+      summary: Create a creative
+      operationId: adCreatives_create
+      parameters:
+      - $ref: '#/components/parameters/adAccountID'
+      - $ref: '#/components/parameters/linkedinVersion'
+      - $ref: '#/components/parameters/restliProtocol'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Created
+  /rest/adAccounts/{adAccountID}/adCreatives/{adCreativeID}:
+    get:
+      tags:
+      - AdCreatives
+      summary: Get a creative
+      operationId: adCreatives_get
+      parameters:
+      - $ref: '#/components/parameters/adAccountID'
+      - name: adCreativeID
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/linkedinVersion'
+      - $ref: '#/components/parameters/restliProtocol'
+      responses:
+        '200':
+          description: OK
+components:
+  parameters:
+    adAccountID:
+      name: adAccountID
+      in: path
+      required: true
+      schema:
+        type: string
+    linkedinVersion:
+      name: Linkedin-Version
+      in: header
+      required: true
+      description: LinkedIn API version in YYYYMM format
+      schema:
+        type: string
+        example: '202605'
+    restliProtocol:
+      name: X-Restli-Protocol-Version
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - 2.0.0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: LinkedIn OAuth 2.0 (3-legged or 2-legged)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.linkedin.com/oauth/v2/authorization
+          tokenUrl: https://www.linkedin.com/oauth/v2/accessToken
+          scopes:
+            rw_ads: Read and write LinkedIn ads data
+            r_ads: Read LinkedIn ads data
+            r_ads_reporting: Read LinkedIn ads reporting
+            r_organization_social: Read organization social actions
+            w_organization_social: Write organization social actions
