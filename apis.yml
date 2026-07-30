@@ -5,7 +5,20 @@ description: >-
   networking data, marketing and advertising capabilities, talent solutions,
   and consumer features including sign-in with LinkedIn.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-linkedin.png
 tags:
   - Marketing
   - Microsoft
@@ -17,59 +30,104 @@ created: '2024-01-01'
 modified: '2026-04-28'
 specificationVersion: '0.19'
 apis:
-  - aid: microsoft-linkedin:marketing-api
-    name: LinkedIn Marketing API
-    tags:
-      - Advertising
-      - Marketing
-      - Social Media
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.linkedin.com/v2/
-    humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
-    properties:
-      - url: https://learn.microsoft.com/en-us/linkedin/marketing/
-        type: Documentation
-    description: >-
-      The LinkedIn Marketing API enables programmatic management of
-      LinkedIn advertising campaigns, audience targeting, creative assets,
-      and performance reporting. Developers can create sponsored content,
-      manage campaign groups, configure conversion tracking, and retrieve
-      analytics data for marketing optimization.
-  - aid: microsoft-linkedin:consumer-api
-    name: LinkedIn Consumer API
-    tags:
-      - Profiles
-      - Sharing
-      - Social Network
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.linkedin.com/v2/
-    humanURL: https://learn.microsoft.com/en-us/linkedin/consumer/
-    properties:
-      - url: https://learn.microsoft.com/en-us/linkedin/consumer/
-        type: Documentation
-    description: >-
-      The LinkedIn Consumer API provides access to member profiles, sign-in
-      with LinkedIn, and content sharing capabilities. Developers can
-      implement social sign-on, retrieve basic profile information, and
-      enable users to share content to their LinkedIn feeds from external
-      applications.
-  - aid: microsoft-linkedin:talent-solutions-api
-    name: LinkedIn Talent Solutions API
-    tags:
-      - HR
-      - Recruiting
-      - Talent
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.linkedin.com/v2/
-    humanURL: https://learn.microsoft.com/en-us/linkedin/talent/
-    properties:
-      - url: https://learn.microsoft.com/en-us/linkedin/talent/
-        type: Documentation
-    description: >-
-      The LinkedIn Talent Solutions API provides access to recruiting and
-      talent management capabilities. It enables integration with applicant
-      tracking systems, job posting management, candidate search, and
-      recruiter workflow automation for enterprise hiring processes.
+- aid: microsoft-linkedin:marketing-api
+  name: LinkedIn Marketing API
+  tags:
+  - Advertising
+  - Marketing
+  - Social Media
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.linkedin.com/v2/
+  humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
+  properties:
+  - url: https://learn.microsoft.com/en-us/linkedin/marketing/
+    type: Documentation
+  description: >-
+    The LinkedIn Marketing API enables programmatic management of LinkedIn advertising campaigns, audience
+    targeting, creative assets, and performance reporting. Developers can create sponsored content, manage
+    campaign groups, configure conversion tracking, and retrieve analytics data for marketing optimization.
+- aid: microsoft-linkedin:consumer-api
+  name: LinkedIn Consumer API
+  tags:
+  - Profiles
+  - Sharing
+  - Social Network
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.linkedin.com/v2/
+  humanURL: https://learn.microsoft.com/en-us/linkedin/consumer/
+  properties:
+  - url: https://learn.microsoft.com/en-us/linkedin/consumer/
+    type: Documentation
+  description: >-
+    The LinkedIn Consumer API provides access to member profiles, sign-in with LinkedIn, and content sharing
+    capabilities. Developers can implement social sign-on, retrieve basic profile information, and enable
+    users to share content to their LinkedIn feeds from external applications.
+- aid: microsoft-linkedin:talent-solutions-api
+  name: LinkedIn Talent Solutions API
+  tags:
+  - HR
+  - Recruiting
+  - Talent
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.linkedin.com/v2/
+  humanURL: https://learn.microsoft.com/en-us/linkedin/talent/
+  properties:
+  - url: https://learn.microsoft.com/en-us/linkedin/talent/
+    type: Documentation
+  description: >-
+    The LinkedIn Talent Solutions API provides access to recruiting and talent management capabilities.
+    It enables integration with applicant tracking systems, job posting management, candidate search,
+    and recruiter workflow automation for enterprise hiring processes.
+- aid: microsoft-linkedin:microsoft-linkedin-adaccounts-api
+  name: Microsoft LinkedIn AdAccounts API
+  description: Manage ad accounts
+  humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
+  baseURL: https://api.linkedin.com/v2/
+  tags:
+  - AdAccounts
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-linkedin-adaccounts-api-openapi.yml
+- aid: microsoft-linkedin:microsoft-linkedin-adaccountusers-api
+  name: Microsoft LinkedIn AdAccountUsers API
+  description: Manage ad account user permissions
+  humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
+  baseURL: https://api.linkedin.com/v2/
+  tags:
+  - AdAccountUsers
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-linkedin-adaccountusers-api-openapi.yml
+- aid: microsoft-linkedin:microsoft-linkedin-adcampaigngroups-api
+  name: Microsoft LinkedIn AdCampaignGroups API
+  description: Manage campaign groups
+  humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
+  baseURL: https://api.linkedin.com/v2/
+  tags:
+  - AdCampaignGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml
+- aid: microsoft-linkedin:microsoft-linkedin-adcampaigns-api
+  name: Microsoft LinkedIn AdCampaigns API
+  description: Manage campaigns
+  humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
+  baseURL: https://api.linkedin.com/v2/
+  tags:
+  - AdCampaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml
+- aid: microsoft-linkedin:microsoft-linkedin-adcreatives-api
+  name: Microsoft LinkedIn AdCreatives API
+  description: Manage creatives
+  humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
+  baseURL: https://api.linkedin.com/v2/
+  tags:
+  - AdCreatives
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-linkedin-adcreatives-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/microsoft-linkedin-agentic-access.yml
