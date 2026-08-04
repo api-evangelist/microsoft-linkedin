@@ -1,0 +1,22 @@
+{
+  "provider": "microsoft-linkedin",
+  "sources": [
+    "microsoft-linkedin-adaccounts-api-openapi.yml",
+    "microsoft-linkedin-adaccountusers-api-openapi.yml",
+    "microsoft-linkedin-adcampaigngroups-api-openapi.yml",
+    "microsoft-linkedin-adcampaigns-api-openapi.yml",
+    "microsoft-linkedin-adcreatives-api-openapi.yml"
+  ],
+  "outputs": [
+    "microsoft-linkedin-adaccounts-api-openapi.yml",
+    "microsoft-linkedin-adaccountusers-api-openapi.yml",
+    "microsoft-linkedin-adcampaigngroups-api-openapi.yml",
+    "microsoft-linkedin-adcampaigns-api-openapi.yml",
+    "microsoft-linkedin-adcreatives-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
