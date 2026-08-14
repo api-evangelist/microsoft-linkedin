@@ -1,9 +1,15 @@
 aid: microsoft-linkedin
 name: Microsoft LinkedIn
 description: >-
-  LinkedIn, owned by Microsoft, provides APIs for accessing professional
-  networking data, marketing and advertising capabilities, talent solutions,
-  and consumer features including sign-in with LinkedIn.
+  LinkedIn, owned by Microsoft, operates a versioned Rest.li API platform covering advertising and
+  marketing, company page and community management, talent and recruiting, sales navigation,
+  learning, and consumer sign-in. The versioned Marketing surface lives under
+  https://api.linkedin.com/rest/ and requires a Linkedin-Version YYYYMM header on every call, with
+  each monthly version supported for a minimum of twelve months before it is sunset. Authentication
+  is OAuth 2.0, and Sign In with LinkedIn is a conformant OpenID Connect provider with a live
+  discovery document. Access to the Marketing, Talent, Sales and Learning APIs is gated behind
+  product approval and, in most cases, a commercial partner relationship; LinkedIn publishes no API
+  pricing and no OpenAPI definitions of its own.
 type: Index
 accessModel:
   pricing: freemium
@@ -27,7 +33,7 @@ tags:
   - Social Network
 url: https://raw.githubusercontent.com/api-evangelist/microsoft-linkedin/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-04-28'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: microsoft-linkedin:marketing-api
@@ -88,6 +94,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-linkedin-adaccounts-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-linkedin-adaccounts-overlay.yaml
 - aid: microsoft-linkedin:microsoft-linkedin-adaccountusers-api
   name: Microsoft LinkedIn AdAccountUsers API
   description: Manage ad account user permissions
@@ -98,6 +106,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-linkedin-adaccountusers-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-linkedin-adaccountusers-overlay.yaml
 - aid: microsoft-linkedin:microsoft-linkedin-adcampaigngroups-api
   name: Microsoft LinkedIn AdCampaignGroups API
   description: Manage campaign groups
@@ -108,6 +118,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-linkedin-adcampaigngroups-overlay.yaml
 - aid: microsoft-linkedin:microsoft-linkedin-adcampaigns-api
   name: Microsoft LinkedIn AdCampaigns API
   description: Manage campaigns
@@ -118,6 +130,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-linkedin-adcampaigns-overlay.yaml
 - aid: microsoft-linkedin:microsoft-linkedin-adcreatives-api
   name: Microsoft LinkedIn AdCreatives API
   description: Manage creatives
@@ -128,6 +142,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/microsoft-linkedin-adcreatives-api-openapi.yml
+  - type: Overlay
+    url: overlays/microsoft-linkedin-adcreatives-overlay.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/microsoft-linkedin-agentic-access.yml
@@ -155,6 +171,73 @@ common:
     url: https://www.linkedin.com/legal/privacy-policy
   - type: Support
     url: https://www.linkedin.com/help/linkedin
+  - type: DeveloperPortal
+    url: https://developer.linkedin.com/
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/linkedin/shared/references/v2/object-types
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/linkedin/marketing/quick-start
+  - type: SignUp
+    url: https://www.linkedin.com/developers/apps/new
+  - type: Blog
+    url: https://www.linkedin.com/developers/news
+  - type: Postman
+    url: https://www.postman.com/linkedin-developer-apis/workspace/linkedin-marketing-solutions-versioned-apis/overview
+  - type: StatusPage
+    url: https://www.linkedin-apistatus.com/
+  - type: Packages
+    url: packages/microsoft-linkedin-packages.yml
+  - type: SDKs
+    url: packages/microsoft-linkedin-packages.yml
+  - type: WellKnown
+    url: well-known/microsoft-linkedin-well-known.yml
+  - type: SecurityTxt
+    url: well-known/microsoft-linkedin-security.txt
+  - type: Security
+    url: security/microsoft-linkedin-vulnerability-disclosure.yml
+  - type: TrustCenter
+    url: security/microsoft-linkedin-trust-center.yml
+  - type: Compliance
+    url: security/microsoft-linkedin-trust-center.yml
+  - type: Conformance
+    url: conformance/microsoft-linkedin-conformance.yml
+  - type: Conventions
+    url: conventions/microsoft-linkedin-conventions.yml
+  - type: ErrorCatalog
+    url: errors/microsoft-linkedin-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/microsoft-linkedin-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/microsoft-linkedin-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/microsoft-linkedin-changelog.yml
+  - type: Sandbox
+    url: sandbox/microsoft-linkedin-sandbox.yml
+  - type: Components
+    url: components/microsoft-linkedin-components.yml
+  - type: DataModel
+    url: data-model/microsoft-linkedin-data-model.yml
+  - type: Webhooks
+    url: asyncapi/microsoft-linkedin-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: MCPServer
+    url: mcp/microsoft-linkedin-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/microsoft-linkedin-tool-crosswalk.yml
+  - type: LLMsTxt
+    url: llms/microsoft-linkedin-llms.txt
+  - type: RateLimits
+    url: rate-limits/microsoft-linkedin-rate-limits.yml
+  - type: Plans
+    url: plans/microsoft-linkedin-plans-pricing.yml
+  - type: FinOps
+    url: finops/microsoft-linkedin-finops.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v1
