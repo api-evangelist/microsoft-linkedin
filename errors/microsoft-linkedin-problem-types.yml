@@ -1,0 +1,131 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/error-handling
+description: >-
+  Error catalog for the LinkedIn APIs, harvested from the published error-handling reference and the
+  Marketing error-responses page. LinkedIn does not use RFC 9457 problem+json; it returns a
+  proprietary three-field JSON envelope with the HTTP status repeated in the body plus a
+  serviceErrorCode subcode.
+format: proprietary-json
+rfc9457: false
+content_type: application/json
+envelope:
+  fields:
+    - name: message
+      description: A human-readable description of the error.
+    - name: serviceErrorCode
+      description: A LinkedIn subcode that further classifies the error beyond the HTTP status.
+    - name: status
+      description: The HTTP status code, repeated inside the body.
+  example: |
+    {
+        "message": "Empty oauth2_access_token",
+        "serviceErrorCode": 401,
+        "status": 401
+    }
+docs:
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/error-handling
+  - https://learn.microsoft.com/en-us/linkedin/marketing/error-responses
+problem_types:
+  - status: 400
+    title: Bad Request
+    description: >-
+      The server could not proceed with the request. Most often caused by bad syntax in the request
+      URL or body, or an invalid character in the URL.
+    remediation: >-
+      Validate URL encoding (URNs in path segments must be encoded), check the request body against
+      the documented schema, and compare against the documented examples.
+  - status: 401
+    title: Unauthorized
+    description: >-
+      A problem with the request's authentication. LinkedIn documents five distinct causes, each
+      with a distinct message.
+    variants:
+      - message: Unknown authentication schema
+        cause: Unrecognized authentication header schema.
+        remediation: 'Use the format Authorization: Bearer {access_token}.'
+      - message: Empty oauth2_access_token
+        cause: The Authorization header is missing or empty.
+        remediation: 'Send Authorization: Bearer {access_token}.'
+      - message: Invalid access token
+        cause: The token value is incorrect.
+        remediation: Re-run the documented authentication procedure to obtain a valid token.
+      - message: Expired access token
+        cause: The access token lifetime has elapsed.
+        remediation: Refresh the token using the authorization code flow refresh token.
+      - message: The token has been revoked
+        cause: The member revoked the application from their LinkedIn privacy settings.
+        remediation: The member must re-authenticate to issue a new token for the application.
+    note: >-
+      Access token downstream verification failures do not surface as 401 — LinkedIn returns
+      500 Internal Server Error for those.
+  - status: 403
+    title: Access Denied
+    description: >-
+      The access token is valid but does not carry permission to call the API. Raised when the
+      application lacks the product/permission, when the member was never asked to grant the
+      permission, or when the requested scope changed between authorization and token exchange.
+    remediation: >-
+      Confirm the app has the required product approved in the Developer Portal, confirm the
+      authorization request asks for the required scopes, and confirm the scope set did not change
+      during the token exchange.
+  - status: 404
+    title: Resource Not Found
+    description: >-
+      The API path or entity does not exist. LinkedIn calls out that some restricted APIs (Ads in
+      particular) return 404 rather than 403 when the caller is not entitled to them.
+    remediation: >-
+      Check the resource path against the versioned documentation, then treat a 404 on a known-good
+      Ads path as an entitlement problem and follow the 403 remediation.
+  - status: 405
+    title: Method Not Allowed
+    description: The HTTP method used is not supported by that resource.
+    remediation: >-
+      Check the resource documentation. On a Rest.li surface most writes are POST with an
+      X-RestLi-Method header rather than PUT/PATCH.
+  - status: 411
+    title: Length Required
+    description: The server refuses a request without a defined Content-Length header.
+    remediation: Set Content-Length explicitly on POST requests that carry an empty body.
+  - status: 426
+    title: Version Header is Deprecated
+    description: >-
+      The version passed in the version header has been sunset. Every Marketing API version is
+      sunset roughly twelve months after release.
+    remediation: >-
+      Update the Linkedin-Version header to a supported YYYYMM value; see the migration status
+      table and lifecycle/microsoft-linkedin-lifecycle.yml.
+    cross_link: lifecycle/microsoft-linkedin-lifecycle.yml
+  - status: 429
+    title: Rate Limit
+    description: >-
+      Throttled. The documented message is "Resource level throttle limit for calls to this resource
+      is reached." LinkedIn also returns 429 occasionally as generic infrastructure protection, in
+      which case service resumes automatically.
+    remediation: >-
+      Review the app's Usage & Limits in the Developer Portal Analytics tab, remove redundant calls,
+      and back off. No Retry-After header is returned, so the backoff interval must be chosen by the
+      client. Higher limits require a partner relationship.
+    cross_link: rate-limits/microsoft-linkedin-rate-limits.yml
+  - status: 500
+    title: Internal Server Error
+    description: >-
+      A LinkedIn-side error. Also the status returned when access-token downstream verification
+      fails, which makes it ambiguous with auth problems.
+    remediation: >-
+      Retry with backoff. If persistent, report to developer support with the request url/method/
+      headers and the response x-li-uuid, x-li-fabric and x-li-request-id headers plus the client ID.
+  - status: 504
+    title: Gateway Timeout
+    description: LinkedIn took too long to process the call.
+    remediation: Implement caching and retry patterns; report persistent occurrences to developer support.
+gaps:
+  - >-
+    LinkedIn publishes no enumerated registry of serviceErrorCode values — the field is documented as
+    existing but its value space is not. Callers cannot branch on it reliably.
+  - >-
+    No application/problem+json, no type URIs, and no machine-readable error catalog, so error
+    handling has to be written against HTTP status plus free-text message matching.
+  - >-
+    The OpenAPI definitions in openapi/ declare only 2xx responses, so this catalog is sourced from
+    the docs rather than derived from the spec.

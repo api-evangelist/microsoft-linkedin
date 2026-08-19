@@ -4,7 +4,11 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft LinkedIn
 providerId: microsoft-linkedin
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-08-13'
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits
+docs: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits
 tags:
   - Marketing
   - Microsoft
@@ -14,86 +18,76 @@ tags:
   - Rate Limiting
   - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the Microsoft LinkedIn API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
+description: >-
+  Rate limiting for the LinkedIn APIs, read from LinkedIn's published rate-limits reference on
+  2026-08-13. This artifact replaces an earlier scaffold that asserted invented numeric quotas and
+  X-RateLimit-* response headers; neither exists. LinkedIn documents the SHAPE of its limits — two
+  scopes, a 24-hour window, a 429 on exhaustion — but deliberately does not publish the NUMBERS,
+  which vary per endpoint and per application and are visible only inside the Developer Portal for
+  an app you own.
+limit_count: 0
+limits_published: false
+limits:
+  - scope: per-application
+    name: Application limit
+    description: Total number of calls the application can make in a day, across all members.
+    window: 24h
+    resets: midnight UTC
+    limit: null
+    note: >-
+      Numeric value is per-endpoint and per-application and is not published. Look it up in the
+      Developer Portal under the app's Analytics tab; it only lists endpoints the app has called at
+      least once today (UTC).
+  - scope: per-member-per-application
+    name: Member limit
+    description: >-
+      Total number of calls a single member (a LinkedIn user whose token initiates the call) can
+      make in a day through one application.
+    window: 24h
+    resets: midnight UTC
+    limit: null
+    note: >-
+      Applies to 3-legged member tokens. For partner integrations this is the per-end-user ceiling
+      the partner can drive on behalf of each member.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+  note: >-
+    LinkedIn publishes NO rate-limit response headers. There is no RateLimit-*, no X-RateLimit-*,
+    and no Retry-After on a 429. An agent or client cannot observe remaining quota or a safe retry
+    interval from the response — the only runtime signal is the 429 itself.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - LinkedIn Marketing API
-      - LinkedIn Consumer API
-      - LinkedIn Talent Solutions API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - LinkedIn Marketing API
-      - LinkedIn Consumer API
-      - LinkedIn Talent Solutions API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - LinkedIn Marketing API
-      - LinkedIn Consumer API
-      - LinkedIn Talent Solutions API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - LinkedIn Marketing API
-      - LinkedIn Consumer API
-      - LinkedIn Talent Solutions API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - LinkedIn Marketing API
-      - LinkedIn Consumer API
-      - LinkedIn Talent Solutions API
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+throttled_message: Resource level throttle limit for calls to this resource is reached.
+infrastructure_throttling:
+  note: >-
+    LinkedIn may also return 429 as generic infrastructure protection unrelated to the app's quota;
+    service resumes automatically.
+observability:
+  runtime_headers: false
+  portal: https://www.linkedin.com/developers/apps
+  portal_path: App > Analytics tab (Usage & Limits)
+  caveat: >-
+    The Analytics tab only shows endpoints the app has called at least once in the current UTC day.
+    To discover the limit for an untouched endpoint you must make one call to it and refresh.
+alerts:
+  channel: email
+  recipients: Developer Admins
+  threshold: 75% of the assigned quota
+  scope: application-level breaches only
+  latency: not real-time; 1-2 hours after the threshold is crossed
+  repeat: a new alert fires for each additional endpoint that breaches on the same day
+  note: Member-level and combined member+app breaches do not trigger alerts.
+increase_path:
+  route: partner program
+  url: https://developer.linkedin.com/support
+  note: >-
+    Higher limits are negotiated through the LinkedIn partner relationship, not requested through a
+    self-serve form.
+gaps:
+  - No published numeric limits, so a developer cannot capacity-plan before building.
+  - No rate-limit response headers, so back-off has to be blind.
+  - No Retry-After on 429.

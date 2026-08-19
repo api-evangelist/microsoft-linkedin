@@ -1,0 +1,102 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/marketing/versioning
+description: >-
+  Versioning, deprecation, and operational lifecycle policy for the LinkedIn APIs. LinkedIn runs one
+  of the most explicit versioning regimes of any large platform: monthly dated versions selected by
+  a request header, a published minimum twelve-month support window, and a hard failure (426) rather
+  than a silent fallback when a caller sends a sunset version.
+docs:
+  - https://learn.microsoft.com/en-us/linkedin/marketing/versioning
+  - https://learn.microsoft.com/en-us/linkedin/talent/versioning
+  - https://learn.microsoft.com/en-us/linkedin/marketing/integrations/migrations
+  - https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes
+  - https://learn.microsoft.com/en-us/linkedin/compliance/upcoming-release-and-deprecation-timeline
+
+versioning:
+  style: request-header
+  header: Linkedin-Version
+  format: YYYYMM
+  current: '202607'
+  first_versioned_release: '202206'
+  base_path: https://api.linkedin.com/rest/
+  cadence: monthly
+  default_applied: false
+  note: >-
+    LinkedIn applies no default version. A call to the /rest/ surface without a Linkedin-Version
+    header is an error, not a request against the latest version. The older /v2/ base path remains
+    unversioned.
+  secondary_header:
+    name: X-Restli-Protocol-Version
+    value: 2.0.0
+
+deprecation_policy:
+  published: true
+  url: https://learn.microsoft.com/en-us/linkedin/marketing/versioning
+  support_window: minimum 12 months from release
+  sunset_behavior: >-
+    A sunset version returns HTTP 426 with a Version Header is Deprecated error rather than falling
+    back to a supported version.
+  sunset_signaling:
+    http_headers: none
+    note: >-
+      LinkedIn does not emit RFC 8594 Sunset or Deprecation response headers. Deprecation is
+      announced in the docs changelog and the migration status table, and enforced at sunset with a
+      426. There is no in-band runtime signal that the version a caller is pinned to is approaching
+      sunset.
+  breaking_change_exception: >-
+    LinkedIn reserves the right to patch any API inside the stable window for critical security,
+    privacy, or bug-fix reasons.
+  recent_sunsets:
+    - version: '202507'
+      sunset: '2026-07-15'
+    - version: '202506'
+      sunset: '2026-06-15'
+    - version: '202505'
+      sunset: '2026-05-15'
+    - version: '202504'
+      sunset: '2026-04-15'
+    - version: '202503'
+      sunset: '2026-03-16'
+  talent_api:
+    cadence: quarterly
+    support_window: minimum 12 months
+    url: https://learn.microsoft.com/en-us/linkedin/talent/versioning
+
+status_page:
+  published: true
+  url: https://www.linkedin-apistatus.com/
+  operator: LinkedIn Corporation
+  platform: Atlassian Statuspage
+  scope: LinkedIn API
+  subscriptions:
+    - email
+    - slack
+    - webhook
+    - rss
+    - atom
+  history_url: https://www.linkedin-apistatus.com/history
+  related:
+    - url: https://www.linkedin-status.com/
+      scope: LinkedIn member-facing platform status
+  note: >-
+    The status page reports a single overall LinkedIn API state; it does not decompose into per-product
+    or per-endpoint components.
+
+sla:
+  published: false
+  note: >-
+    No public uptime SLA for the developer APIs. Service commitments, where they exist, sit inside
+    partner and enterprise agreements rather than public documentation.
+
+deprecated_operations:
+  derived_from: openapi/
+  count: 0
+  note: >-
+    No operation in the repo's OpenAPI definitions carries deprecated: true. LinkedIn deprecates at
+    the version level rather than the operation level, so operation-level deprecation flags are not
+    how this platform signals decay.
+
+changelog:
+  url: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes
+  artifact: changelog/microsoft-linkedin-changelog.yml

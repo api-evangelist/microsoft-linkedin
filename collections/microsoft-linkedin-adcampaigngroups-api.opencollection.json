@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LinkedIn Marketing AdAccounts AdCampaignGroups API",
+    "version": "202605"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.linkedin.com/oauth/v2/authorization",
+      "accessTokenUrl": "https://www.linkedin.com/oauth/v2/accessToken",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AdCampaignGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search campaign groups for an ad account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search campaign groups for an ad account"
+        },
+        {
+          "info": {
+            "name": "Create a campaign group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a campaign group"
+        },
+        {
+          "info": {
+            "name": "Get a campaign group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups/:campaignGroupID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignGroupID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a campaign group"
+        },
+        {
+          "info": {
+            "name": "Update a campaign group (partial update)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/rest/adAccounts/:adAccountID/adCampaignGroups/:campaignGroupID",
+            "headers": [
+              {
+                "name": "Linkedin-Version",
+                "value": ""
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": ""
+              },
+              {
+                "name": "X-RestLi-Method",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "adAccountID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignGroupID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a campaign group (partial update)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

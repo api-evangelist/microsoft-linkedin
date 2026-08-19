@@ -1,0 +1,73 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.linkedin.com/developers/news/featured-updates/api-clients
+description: >-
+  First-party LinkedIn API client libraries. LinkedIn publishes exactly two official clients — a
+  JavaScript/TypeScript client on npm and a Python client on PyPI — both maintained in the
+  linkedin-developers GitHub org. Both are thin Rest.li protocol wrappers; neither models any
+  specific LinkedIn API. Registry metadata was read live on 2026-08-13.
+summary:
+  official: 2
+  community: 0
+  languages:
+    - javascript
+    - python
+  currency_note: >-
+    Both official clients last published in 2023 (npm 0.3.0 on 2023-02-07, PyPI 0.3.0 on
+    2023-06-29) while the Marketing API has shipped a new monthly version every month since —
+    202607 is current as of this pass. The first-party SDKs are roughly three years behind the
+    API they wrap. Because they are protocol-level wrappers rather than generated clients this
+    does not break them outright, but no official client tracks current API versions.
+packages:
+  - language: javascript
+    name: linkedin-api-client
+    registry: npm
+    registry_url: https://www.npmjs.com/package/linkedin-api-client
+    metadata_url: https://registry.npmjs.org/linkedin-api-client
+    repo: https://github.com/linkedin-developers/linkedin-api-js-client
+    install: npm install linkedin-api-client
+    official: true
+    version: 0.3.0
+    published: '2023-02-07'
+    description: >-
+      Official JavaScript client library for LinkedIn APIs. Thin client over the Rest.li protocol
+      built on Axios and written in TypeScript, intended for Node.js server applications. Includes
+      an auth client for generating, inspecting, and refreshing access tokens.
+  - language: python
+    name: linkedin-api-client
+    registry: pypi
+    registry_url: https://pypi.org/project/linkedin-api-client/
+    metadata_url: https://pypi.org/pypi/linkedin-api-client/json
+    repo: https://github.com/linkedin-developers/linkedin-api-python-client
+    install: pip install linkedin-api-client
+    official: true
+    version: 0.3.0
+    published: '2023-06-29'
+    description: >-
+      Official Python client library for LinkedIn APIs. Thin client over the Rest.li protocol built
+      on the requests library, plus an auth client for generating, inspecting, and refreshing
+      access tokens.
+absent:
+  - language: java
+    note: >-
+      No first-party Java/Maven Central client. LinkedIn's own docs list only the JavaScript and
+      Python clients; older community linkedin-j / scribe-based libraries are not LinkedIn-published.
+  - language: go
+    note: No first-party Go module published by linkedin-developers for the public LinkedIn APIs.
+  - language: ruby
+    note: No first-party RubyGems client.
+  - language: csharp
+    note: No first-party NuGet client.
+  - language: php
+    note: No first-party Packagist client.
+evidence:
+  - url: https://www.linkedin.com/developers/news/featured-updates/api-clients
+    kind: provider announcement naming the two official clients
+  - url: https://registry.npmjs.org/linkedin-api-client
+    kind: npm registry metadata (version + publish date)
+  - url: https://pypi.org/pypi/linkedin-api-client/json
+    kind: PyPI registry metadata (version + publish date)
+  - url: https://github.com/linkedin-developers/linkedin-api-js-client
+    kind: first-party source repository
+  - url: https://github.com/linkedin-developers/linkedin-api-python-client
+    kind: first-party source repository

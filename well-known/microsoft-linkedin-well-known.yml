@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of the LinkedIn API, developer, and member hosts
+description: >-
+  Well-known path probe for Microsoft LinkedIn. Two real documents are served: an RFC 9116
+  security.txt at the www.linkedin.com root, and an OpenID Connect discovery document under the
+  /oauth/ prefix (LinkedIn serves OIDC discovery at https://www.linkedin.com/oauth/.well-known/openid-configuration,
+  not at the host root — the root path 404s). The API host api.linkedin.com serves no well-known
+  documents at all; every probed path there returned 404.
+summary:
+  hits: 2
+  misses: 16
+  hosts_probed:
+    - www.linkedin.com
+    - api.linkedin.com
+    - developer.linkedin.com
+paths:
+  - host: www.linkedin.com
+    path: /.well-known/security.txt
+    url: https://www.linkedin.com/.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    file: well-known/microsoft-linkedin-security.txt
+    note: >-
+      Real RFC 9116 document. Declares the HackerOne LinkedIn program as both Contact and Policy.
+      Self-declares conformance to draft-foudil-securitytxt-07 and carries no Expires field, which
+      RFC 9116 requires.
+  - host: www.linkedin.com
+    path: /oauth/.well-known/openid-configuration
+    url: https://www.linkedin.com/oauth/.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: well-known/microsoft-linkedin-openid-configuration.json
+    note: >-
+      Real OpenID Provider Metadata document for Sign In with LinkedIn using OpenID Connect.
+      issuer https://www.linkedin.com/oauth, scopes openid/profile/email, RS256 id_tokens,
+      pairwise subject identifiers, userinfo on api.linkedin.com.
+  - host: www.linkedin.com
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: www.linkedin.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: www.linkedin.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+  - host: www.linkedin.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: www.linkedin.com
+    path: /llms.txt
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/oauth-protected-resource
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: api.linkedin.com
+    path: /.well-known/agent.json
+    status: 404
+  - host: api.linkedin.com
+    path: /llms.txt
+    status: 404
+  - host: developer.linkedin.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: developer.linkedin.com
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: developer.linkedin.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: developer.linkedin.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: developer.linkedin.com
+    path: /llms.txt
+    status: 404
+gaps:
+  - No /.well-known/api-catalog on any host, so there is no machine-readable API index.
+  - No OAuth 2.0 Authorization Server Metadata (RFC 8414) or Protected Resource Metadata (RFC 9728)
+    on the API host; the OIDC document under /oauth/ is the only discovery surface.
+  - security.txt has no Expires field, which RFC 9116 makes mandatory.

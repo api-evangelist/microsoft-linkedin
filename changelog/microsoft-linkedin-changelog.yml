@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes
+description: >-
+  Dated changelog for the LinkedIn Marketing API. Each monthly version ships with a documented set
+  of additions and, where applicable, breaking changes, alongside the sunset dates for the versions
+  falling out of the twelve-month support window. Archived years live under
+  integrations/archived-recent-changes/.
+scheme: dated-monthly-version
+version_format: YYYYMM
+current_version: '202607'
+url: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes
+archive_url: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/archived-recent-changes/2023/marketing-api-changes
+window: most recent 6 monthly releases as of 2026-08-13
+entries:
+  - version: '202607'
+    date: '2026-07-13'
+    breaking: false
+    sunsets:
+      - version: '202507'
+        date: '2026-07-15'
+    highlights:
+      - Predictive Audiences API returns the id field for audiences created in Campaign Manager or via API.
+      - Conversions API adds the SHA256_IP_ADDRESS user identifier in userIds for improved matching (IPv4 only).
+      - >-
+        SPONSORED_INMAILS campaigns with the LEAD_GENERATION objective now default creativeSelection
+        to OPTIMIZED instead of ROUND_ROBIN.
+  - version: '202606'
+    date: '2026-06'
+    breaking: false
+    sunsets:
+      - version: '202506'
+        date: '2026-06-15'
+    highlights:
+      - Company Intelligence API adds a LAST_365_DAYS lookback window.
+      - >-
+        Company Intelligence API adds companySize, industry, countryCode and
+        costInLocalCurrencyPerPaidQualifiedLead fields.
+      - Dynamic UTM API supports the CREATIVE_NAME parameter.
+      - Conversation and Message Ads render a Not Interested CTA automatically.
+      - Developer support moved off Zendesk to the Developer Support Request Form.
+  - version: '202605'
+    date: '2026-05'
+    breaking: true
+    sunsets:
+      - version: '202505'
+        date: '2026-05-15'
+    breaking_changes:
+      - Events Management API — endsAt became a required field (previously optional).
+      - Conversions API — lead is now accepted as a sole user identifier, changing accepted payload shapes.
+    highlights:
+      - Events Management API adds hasDarkUgc (create-only) for off-platform events.
+      - Event Ads API supports the LEAD_GENERATION objective.
+      - Conversions API adds the PLAINTEXT_IP_ADDRESS and GOOGLE_AID user identifiers.
+      - Conversions API adds conversionOwnershipTypes for cross-account shared conversions.
+      - Predictive Audiences API adds a GET_ALL method.
+      - Ad Analytics API adds the appointmentsScheduled metric for Lead Gen campaigns.
+  - version: '202604'
+    date: '2026-04'
+    breaking: false
+    sunsets:
+      - version: '202504'
+        date: '2026-04-15'
+    highlights:
+      - >-
+        Member Post Statistics adds creator metrics POST_SEND, POST_SAVE, LINK_CLICKS,
+        PREMIUM_CTA_CLICKS, FOLLOWER_GAINED_FROM_CONTENT and PROFILE_VIEW_FROM_CONTENT.
+      - Company Intelligence API extends the lookback window to LAST_180_DAYS.
+      - New Integration Requirements pages published for partner certification across 10+ product areas.
+  - version: '202603'
+    date: '2026-03'
+    breaking: true
+    sunsets:
+      - version: '202503'
+        date: '2026-03-16'
+    breaking_changes:
+      - >-
+        Lead Sync API — webhook validation became mandatory for new lead notifications effective
+        2026-03-16; unvalidated webhooks stop receiving events.
+    highlights:
+      - Company Intelligence API adds paidQualifiedLeads and conversions fields.
+      - Ads Targeting Facets API adds the buyerGroups facet.
+      - Brand Lift Testing API capped at 50 Campaign Groups per test.
+      - Event Management API documents field mutability — no fields are updatable once an event begins.
+  - version: '202602'
+    date: '2026-02'
+    breaking: false
+    sunsets:
+      - version: '202502'
+        date: '2026-02-16'
+    highlights:
+      - Videos API adds the templateName and linkbackContext media attribution fields.
+      - >-
+        Ad Campaigns and Budget Pricing APIs add the MAX_QUALIFIED_LEAD optimization target for
+        LEAD_GENERATION campaigns, driven by QUALIFIED_LEAD conversion rules from the Conversions API.
+note: >-
+  The changelog is versioned documentation: each monthly moniker (li-lms-YYYY-MM) renders its own
+  copy of the changes from the previous version. Talent (LTS) and Learning publish separate
+  changelogs on the same Microsoft Learn site.

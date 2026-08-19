@@ -1,0 +1,146 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/
+description: >-
+  LinkedIn publishes no MCP server. Every LinkedIn MCP server in circulation is community-built on
+  top of either the public API or the unofficial Voyager endpoints. The tool list below is an API
+  Evangelist CANDIDATE derived one-for-one from the OpenAPI operations in this repo — it is a design
+  proposal, not a surface anyone can call today.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: probed
+  note: >-
+    No first-party server exists in either shape. Probed POST tools/list against
+    https://mcp.linkedin.com/mcp (404), https://api.linkedin.com/mcp (404) and
+    https://developer.linkedin.com/mcp (404) on 2026-08-13. No @linkedin or linkedin-developers
+    package on npm or PyPI advertises an MCP server. auth is recorded as oauth because that is what
+    any real server would have to use, not because a server exists.
+search_result:
+  official_hosted_server: none
+  official_stdio_package: none
+  probes:
+    - url: https://mcp.linkedin.com/mcp
+      method: POST tools/list
+      status: 404
+    - url: https://api.linkedin.com/mcp
+      method: POST tools/list
+      status: 404
+    - url: https://developer.linkedin.com/mcp
+      method: POST tools/list
+      status: 404
+    - url: https://api.linkedin.com/.well-known/agent-card.json
+      method: GET
+      status: 404
+  third_party:
+    - name: linkedin-mcp-server
+      registry: pypi
+      url: https://pypi.org/project/linkedin-mcp-server/
+      first_party: false
+      note: >-
+        Community package. Recorded for completeness only; it is not operated or endorsed by
+        LinkedIn and does not count as a provider-published MCP surface.
+    - name: felipfr/linkedin-mcpserver
+      url: https://github.com/felipfr/linkedin-mcpserver
+      first_party: false
+    - name: Dishant27/linkedin-mcp-server
+      url: https://github.com/Dishant27/linkedin-mcp-server
+      first_party: false
+    - name: quinnjr/linkedin-mcp
+      url: https://github.com/quinnjr/linkedin-mcp
+      first_party: false
+  caution: >-
+    Several community LinkedIn MCP servers drive the unofficial Voyager endpoints with a member
+    session cookie rather than the public API. That is outside the LinkedIn API Terms of Use and
+    outside the scope of anything this catalog would recommend.
+server:
+  name: microsoft-linkedin
+  transport: http
+  url: null
+tools:
+  - name: search_ad_accounts
+    description: Search LinkedIn ad accounts by id, name, reference, type, status or test flag.
+    source_operation: openapi/microsoft-linkedin-adaccounts-api-openapi.yml#adAccounts_search
+    consequence: read
+  - name: create_ad_account
+    description: Create a BUSINESS ad account. Supports batch creation via the X-RestLi-Method header.
+    source_operation: openapi/microsoft-linkedin-adaccounts-api-openapi.yml#adAccounts_create
+    consequence: write
+  - name: get_ad_account
+    description: Fetch a single ad account by id.
+    source_operation: openapi/microsoft-linkedin-adaccounts-api-openapi.yml#adAccounts_get
+    consequence: read
+  - name: update_ad_account
+    description: Partially update an ad account with a Rest.li patch payload.
+    source_operation: openapi/microsoft-linkedin-adaccounts-api-openapi.yml#adAccounts_update
+    consequence: write
+  - name: delete_ad_account
+    description: Delete a DRAFT ad account.
+    source_operation: openapi/microsoft-linkedin-adaccounts-api-openapi.yml#adAccounts_delete
+    consequence: destructive
+  - name: find_ad_account_users
+    description: Find users and roles attached to an ad account.
+    source_operation: openapi/microsoft-linkedin-adaccountusers-api-openapi.yml#adAccountUsers_find
+    consequence: read
+  - name: search_campaign_groups
+    description: Search campaign groups within an ad account.
+    source_operation: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml#adCampaignGroups_search
+    consequence: read
+  - name: create_campaign_group
+    description: Create a campaign group under an ad account.
+    source_operation: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml#adCampaignGroups_create
+    consequence: write
+  - name: get_campaign_group
+    description: Fetch a campaign group.
+    source_operation: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml#adCampaignGroups_get
+    consequence: read
+  - name: update_campaign_group
+    description: Partially update a campaign group.
+    source_operation: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml#adCampaignGroups_update
+    consequence: write
+  - name: search_campaigns
+    description: Search campaigns under an ad account.
+    source_operation: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml#adCampaigns_search
+    consequence: read
+  - name: create_campaign
+    description: Create a campaign under an ad account. Spends money once ACTIVE outside a test account.
+    source_operation: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml#adCampaigns_create
+    consequence: write
+  - name: get_campaign
+    description: Fetch a campaign.
+    source_operation: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml#adCampaigns_get
+    consequence: read
+  - name: update_campaign
+    description: Partially update a campaign, including status and budget.
+    source_operation: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml#adCampaigns_update
+    consequence: write
+  - name: search_creatives
+    description: Search creatives under an ad account.
+    source_operation: openapi/microsoft-linkedin-adcreatives-api-openapi.yml#adCreatives_search
+    consequence: read
+  - name: create_creative
+    description: Create a creative under an ad account.
+    source_operation: openapi/microsoft-linkedin-adcreatives-api-openapi.yml#adCreatives_create
+    consequence: write
+  - name: get_creative
+    description: Fetch a creative.
+    source_operation: openapi/microsoft-linkedin-adcreatives-api-openapi.yml#adCreatives_get
+    consequence: read
+agent_notes:
+  - >-
+    Any real server must inject Linkedin-Version (YYYYMM) and X-Restli-Protocol-Version: 2.0.0 on
+    every call; LinkedIn applies no default version and a sunset version fails with 426.
+  - >-
+    There is no idempotency key. A retried create_* tool call creates a duplicate entity, so a
+    server must dedupe client-side.
+  - >-
+    No rate-limit headers are returned. A server cannot expose remaining quota to the model; on 429
+    it must back off blind.
+  - >-
+    Writes should be scoped to a test ad account (AdAccount.test = true) during development —
+    entities under it never serve and never bill.
+cross_link: mcp/microsoft-linkedin-tool-crosswalk.yml

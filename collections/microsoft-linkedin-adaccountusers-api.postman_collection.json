@@ -1,0 +1,167 @@
+{
+  "item": [
+    {
+      "id": "6e2727df-c056-4ef8-84a4-ac5fcf159890",
+      "name": "AdAccountUsers",
+      "description": {
+        "content": "Manage ad account user permissions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d305cb79-d138-4855-9055-6f8dffd88146",
+          "name": "Find ad account users",
+          "request": {
+            "name": "Find ad account users",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "adAccountUsers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "accounts",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) LinkedIn API version in YYYYMM format",
+                "key": "Linkedin-Version",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Restli-Protocol-Version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1921e0ac-1bea-4431-b9cc-f7d258231c97",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adAccountUsers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accounts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) LinkedIn API version in YYYYMM format",
+                    "key": "Linkedin-Version",
+                    "value": "202605"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Restli-Protocol-Version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.linkedin.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "rw_ads r_ads r_ads_reporting r_organization_social w_organization_social"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.linkedin.com/oauth/v2/accessToken"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.linkedin.com/oauth/v2/authorization"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b49de210-f3cb-4763-a721-407f465986fc",
+    "name": "LinkedIn Marketing AdAccounts AdAccountUsers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing LinkedIn advertising - ad accounts, ad account\nusers, ad campaign groups, ad campaigns, and ad creatives. The\nversioned API requires the Linkedin-Version header (YYYYMM format)\nand the X-Restli-Protocol-Version: 2.0.0 header for most endpoints.\nAuthentication uses an OAuth 2.0 bearer token with scopes such as\nrw_ads (read/write) or r_ads (read-only).\n\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

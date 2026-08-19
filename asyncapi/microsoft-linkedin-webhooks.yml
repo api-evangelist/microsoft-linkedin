@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/webhook-validation
+description: >-
+  LinkedIn's event surface is webhooks only. There is no published AsyncAPI document, no streaming
+  endpoint, no message broker, and no event catalog in machine-readable form. Webhooks are gated:
+  the Webhooks tab in the Developer Portal is only enabled for applications with an approved
+  webhook use case, and Lead Sync subscriptions can only be created through the Lead Notification
+  Subscriptions API, never through the UI.
+asyncapi_published: false
+asyncapi_note: >-
+  LinkedIn publishes no AsyncAPI (or CloudEvents) description of its webhook payloads. This artifact
+  captures the webhook contract from the prose documentation instead. NOT fabricated as an AsyncAPI
+  document — an AsyncAPI here would be our invention, not LinkedIn's contract.
+docs:
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/webhook-validation
+  - https://learn.microsoft.com/en-us/linkedin/marketing/lead-sync/leadsync
+transport: https
+protocol: HTTP POST callback
+https_required: true
+ngrok_supported: false
+access:
+  gated: true
+  note: >-
+    Webhooks are available only to applications with an approved use case. The Webhooks tab does not
+    appear in the Developer Portal otherwise.
+registration:
+  location: Developer Portal > app > Webhooks tab
+  url: https://www.linkedin.com/developers/apps
+  exception:
+    surface: Lead Sync
+    note: >-
+      Lead notification subscriptions must be created via the Lead Notification Subscriptions API;
+      they cannot be created in the UI.
+validation:
+  model: challenge-response
+  flow:
+    - LinkedIn generates a type-4 UUID challengeCode.
+    - LinkedIn issues an HTTP GET to the registered endpoint with challengeCode as a query parameter.
+    - >-
+      The endpoint computes challengeResponse = lowercase hex of HMACSHA256(challengeCode, clientSecret)
+      and returns both challengeCode and challengeResponse as JSON with 200 OK within 3 seconds,
+      Content-Type application/json.
+    - LinkedIn recomputes and compares; a mismatch fails with "This URL did not pass the security challenge check".
+  fields:
+    - name: applicationId
+      required: false
+      description: >-
+        Sent only for parent-child application integrations such as Apply Connect. Indicates which
+        application's clientSecret to use when generating the challenge response.
+    - name: challengeCode
+      required: true
+      description: Randomly generated type-4 UUID created by LinkedIn.
+    - name: challengeResponse
+      required: true
+      description: Hex-encoded HMACSHA256 of the challengeCode keyed by the application clientSecret.
+  response_deadline_seconds: 3
+  revalidation:
+    interval: every 2 hours
+    failure_threshold: 3 consecutive failures
+    on_failure: endpoint moves to a Blocked state and stops receiving events
+    notifications: warning emails per failed attempt, plus a blocked notification
+    recovery: manual re-validation from the Developer Portal
+delivery:
+  signature_header: X-LI-Signature
+  signature_algorithm: HMACSHA256
+  string_to_sign: '"hmacsha256=" + <raw JSON POST body>'
+  signature_encoding: lowercase hex digest only (the hmacsha256= prefix is not part of the header value)
+  verification: constant-time comparison; discard the event on mismatch
+  body_handling: >-
+    Hash the body exactly as received. Re-serializing, pretty-printing or reformatting the JSON
+    breaks the signature.
+  at_least_once: true
+  deduplication:
+    required: true
+    key: Notification ID in the payload
+    note: LinkedIn may deliver the same notification more than once; the consumer must dedupe.
+  expected_response: any 2xx; anything else is treated as a delivery failure
+events:
+  published_catalog: false
+  known_surfaces:
+    - name: Lead notifications
+      product: Lead Sync API
+      docs: https://learn.microsoft.com/en-us/linkedin/marketing/lead-sync/leadsync
+      subscription: Lead Notification Subscriptions API
+      note: >-
+        Since version 202603 (effective 2026-03-16) webhook validation is mandatory for new lead
+        notifications; unvalidated endpoints receive nothing.
+    - name: Apply Connect notifications
+      product: Talent Solutions / Apply Connect
+      note: Uses the parent-child application model, hence the applicationId validation field.
+  note: >-
+    LinkedIn does not publish a consolidated event-type registry with payload schemas. Event shapes
+    are documented per product rather than centrally, which is why no event list is asserted here
+    beyond the surfaces the docs name.
+gaps:
+  - No AsyncAPI or CloudEvents description of any webhook payload.
+  - No central event catalog; no per-event schema registry.
+  - No replay or event-history API — a blocked endpoint loses the events sent while blocked.
+  - No documented retry policy or backoff schedule for failed deliveries.

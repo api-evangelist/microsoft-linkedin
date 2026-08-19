@@ -1,0 +1,189 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/ + https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-accounts
+description: >-
+  Entity-relationship graph for the LinkedIn Marketing advertising surface captured in this repo,
+  derived from the OpenAPI definitions in openapi/ and enriched from the published ad account
+  object reference. LinkedIn identifies every entity by URN rather than by opaque id, so the
+  relationship edges below are URN references, not $ref links — the specs carry very few component
+  schemas and the graph is expressed through path nesting and URN-typed fields.
+identifier_scheme:
+  style: urn
+  format: 'urn:li:{entityType}:{id}'
+  note: >-
+    URNs must be URL-encoded in path segments. A trailing tilde on a URN field (field~) decorates
+    the reference with the referenced entity — LinkedIn's expansion mechanism.
+  known_types:
+    - 'urn:li:sponsoredAccount'
+    - 'urn:li:sponsoredCampaignGroup'
+    - 'urn:li:sponsoredCampaign'
+    - 'urn:li:sponsoredCreative'
+    - 'urn:li:organization'
+    - 'urn:li:person'
+entities:
+  - name: AdAccount
+    urn_type: 'urn:li:sponsoredAccount'
+    collection: /rest/adAccounts
+    schema: openapi/microsoft-linkedin-adaccounts-api-openapi.yml#/components/schemas/AdAccount
+    operations:
+      - adAccounts_search
+      - adAccounts_create
+      - adAccounts_get
+      - adAccounts_update
+      - adAccounts_delete
+    key_fields:
+      - id
+      - name
+      - currency
+      - type
+      - status
+      - servingStatuses
+      - reference
+      - referenceInfo
+      - test
+      - changeAuditStamps
+      - version.versionTag
+    enums:
+      type:
+        - BUSINESS
+        - ENTERPRISE
+      status:
+        - ACTIVE
+        - CANCELED
+        - DRAFT
+        - PENDING_DELETION
+        - REMOVED
+      servingStatuses:
+        - RUNNABLE
+        - STOPPED
+        - BILLING_HOLD
+        - ACCOUNT_TOTAL_BUDGET_HOLD
+        - ACCOUNT_END_DATE_HOLD
+        - RESTRICTED_HOLD
+        - INTERNAL_HOLD
+    limits:
+      max_campaigns: 5000
+      max_creatives: 15000
+  - name: AdAccountUser
+    collection: /rest/adAccountUsers
+    operations:
+      - adAccountUsers_find
+    key_fields:
+      - account
+      - user
+      - role
+    enums:
+      role:
+        - ACCOUNT_BILLING_ADMIN
+        - ACCOUNT_MANAGER
+        - CAMPAIGN_MANAGER
+        - CREATIVE_MANAGER
+        - VIEWER
+  - name: AdCampaignGroup
+    urn_type: 'urn:li:sponsoredCampaignGroup'
+    collection: /rest/adAccounts/{adAccountID}/adCampaignGroups
+    operations:
+      - adCampaignGroups_search
+      - adCampaignGroups_create
+      - adCampaignGroups_get
+      - adCampaignGroups_update
+  - name: AdCampaign
+    urn_type: 'urn:li:sponsoredCampaign'
+    collection: /rest/adAccounts/{adAccountID}/adCampaigns
+    schema: openapi/microsoft-linkedin-adcampaigns-api-openapi.yml#/components/schemas/AdCampaign
+    operations:
+      - adCampaigns_search
+      - adCampaigns_create
+      - adCampaigns_get
+      - adCampaigns_update
+    key_fields:
+      - account
+      - associatedEntity
+      - campaignGroup
+      - type
+      - costType
+      - dailyBudget
+      - targetingCriteria
+      - status
+      - test
+  - name: AdCreative
+    urn_type: 'urn:li:sponsoredCreative'
+    collection: /rest/adAccounts/{adAccountID}/adCreatives
+    operations:
+      - adCreatives_search
+      - adCreatives_create
+      - adCreatives_get
+  - name: Organization
+    urn_type: 'urn:li:organization'
+    external: true
+    note: Referenced by AdAccount.reference and AdCampaign.associatedEntity. Managed by the Community Management APIs, not in this repo's specs.
+  - name: Person
+    urn_type: 'urn:li:person'
+    external: true
+    note: Referenced by AdAccount.reference and by changeAuditStamps.created.actor.
+relationships:
+  - from: AdAccount
+    to: AdCampaignGroup
+    type: has_many
+    via: path nesting (/rest/adAccounts/{adAccountID}/adCampaignGroups)
+  - from: AdAccount
+    to: AdCampaign
+    type: has_many
+    via: path nesting + AdCampaign.account URN
+  - from: AdAccount
+    to: AdCreative
+    type: has_many
+    via: path nesting (/rest/adAccounts/{adAccountID}/adCreatives)
+  - from: AdAccount
+    to: AdAccountUser
+    type: has_many
+    via: adAccountUsers finder keyed by account URN
+  - from: AdCampaignGroup
+    to: AdCampaign
+    type: has_many
+    via: AdCampaign.campaignGroup URN
+  - from: AdCampaign
+    to: AdCreative
+    type: has_many
+    via: AdCreative campaign reference URN
+  - from: AdAccount
+    to: Organization
+    type: belongs_to
+    via: reference (urn:li:organization:{id})
+    optional: true
+  - from: AdAccount
+    to: Person
+    type: belongs_to
+    via: reference (urn:li:person:{id})
+    optional: true
+  - from: AdCampaign
+    to: Organization
+    type: belongs_to
+    via: associatedEntity
+  - from: AdAccountUser
+    to: Person
+    type: belongs_to
+    via: user URN
+inheritance:
+  test_flag:
+    note: >-
+      The immutable AdAccount.test boolean is inherited by every child entity — campaign groups,
+      campaigns and creatives created under a test account all carry test: true. See
+      sandbox/microsoft-linkedin-sandbox.yml.
+audit:
+  field: changeAuditStamps
+  shape:
+    created: {actor: URN, time: epoch-millis}
+    lastModified: {actor: URN, time: epoch-millis}
+  note: Present on most Marketing entities; timestamps are epoch milliseconds.
+concurrency:
+  field: version.versionTag
+  note: Returned on AdAccount fetches; LinkedIn does not document it as an optimistic-concurrency precondition.
+gaps:
+  - >-
+    The repo's OpenAPI definitions declare only three component schemas (AdAccount,
+    AdAccountSearchResponse, AdCampaign), so most field-level detail here comes from the docs rather
+    than from the spec.
+  - >-
+    This graph covers only the advertising core. The Community Management, Lead Sync, Conversions,
+    Reporting, Talent and Learning entity graphs are not modelled in this repo.

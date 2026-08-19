@@ -1,0 +1,147 @@
+generated: '2026-08-13'
+method: searched
+source: https://security.linkedin.com/trust-and-compliance
+description: >-
+  Standards and cross-cutting conformance assertions for the LinkedIn API surface. LinkedIn's
+  strongest conformance story is identity — a real OpenID Connect provider with a live discovery
+  document — and organizational security certification. Its weakest is HTTP/API convention: the
+  public API is a Rest.li 2.0.0 surface, not a REST/HTTP-idiomatic one, and it adopts none of the
+  modern API RFCs (9457 problem details, 9110 rate-limit fields, 8594 sunset headers).
+standards:
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      Authorization code flow and client credentials flow published, with
+      https://www.linkedin.com/oauth/v2/authorization and
+      https://www.linkedin.com/oauth/v2/accessToken as the endpoints. Confirmed in the OIDC
+      discovery document and in the OpenAPI securitySchemes in openapi/.
+    source: https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication
+  - id: oidc
+    name: OpenID Connect Core / Discovery
+    conforms: true
+    evidence: >-
+      Live OpenID Provider Metadata at
+      https://www.linkedin.com/oauth/.well-known/openid-configuration (HTTP 200, probed 2026-08-13):
+      issuer https://www.linkedin.com/oauth, RS256 id_token signing, pairwise subject identifiers,
+      jwks_uri https://www.linkedin.com/oauth/openid/jwks, scopes openid/profile/email, userinfo at
+      https://api.linkedin.com/v2/userinfo. Saved verbatim to
+      well-known/microsoft-linkedin-openid-configuration.json.
+    source: https://www.linkedin.com/oauth/.well-known/openid-configuration
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: false
+    evidence: >-
+      /.well-known/oauth-authorization-server returned 404 on api.linkedin.com and www.linkedin.com
+      (probed 2026-08-13). Only the OIDC discovery document exists, and it is served under the
+      /oauth/ path prefix rather than the host root.
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata
+    conforms: false
+    evidence: /.well-known/oauth-protected-resource returned 404 on api.linkedin.com (probed 2026-08-13).
+  - id: rfc9116
+    name: security.txt
+    conforms: partial
+    evidence: >-
+      https://www.linkedin.com/.well-known/security.txt returns 200 with Contact, Canonical and
+      Policy fields, but self-declares conformance to draft-foudil-securitytxt-07 and omits the
+      Expires field that RFC 9116 makes mandatory.
+    source: https://www.linkedin.com/.well-known/security.txt
+  - id: rfc9457
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Errors are returned as a proprietary {message, serviceErrorCode, status} JSON object with
+      Content-Type application/json. No type URIs, no application/problem+json.
+    source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/error-handling
+  - id: rate-limit-headers
+    name: RateLimit header fields for HTTP (RFC 9110 / draft-ietf-httpapi-ratelimit-headers)
+    conforms: false
+    evidence: >-
+      LinkedIn publishes no RateLimit-*, no X-RateLimit-* and no Retry-After on 429. Quota is only
+      observable in the Developer Portal Analytics tab.
+    source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits
+  - id: rfc8594
+    name: Sunset HTTP header
+    conforms: false
+    evidence: >-
+      Version sunset is announced in documentation and enforced at sunset with an HTTP 426. No
+      Sunset or Deprecation response headers are emitted.
+    source: https://learn.microsoft.com/en-us/linkedin/marketing/versioning
+  - id: idempotency-key
+    name: Idempotency-Key header (draft-ietf-httpapi-idempotency-key-header)
+    conforms: false
+    evidence: >-
+      No idempotency key is documented for any write operation. Retried CREATE calls duplicate.
+      See conventions/microsoft-linkedin-conventions.yml.
+  - id: pagination
+    name: Documented pagination
+    conforms: true
+    evidence: >-
+      Offset pagination with start/count documented platform-wide; the newer Marketing search
+      resources use cursor pagination with pageSize (max 1,000) and pageToken/nextPageToken.
+    source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/pagination
+  - id: webhook-signing
+    name: Signed webhook delivery
+    conforms: true
+    evidence: >-
+      X-LI-Signature carries an HMACSHA256 digest over "hmacsha256=" + raw body keyed by the app
+      clientSecret, plus a challenge-response endpoint ownership proof re-run every two hours.
+    source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/webhook-validation
+  - id: restli
+    name: Rest.li 2.0.0 protocol
+    conforms: true
+    evidence: >-
+      X-Restli-Protocol-Version: 2.0.0 is required on most calls; finders, batch methods, projections
+      and PARTIAL_UPDATE patch bodies follow Rest.li rather than REST conventions.
+    source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/methods
+  - id: openapi
+    name: OpenAPI description published by the provider
+    conforms: false
+    evidence: >-
+      No OpenAPI or Swagger document is published by LinkedIn. /openapi.json, /openapi.yaml,
+      /swagger.json, /api-docs, /docs and /redoc all returned 404 on api.linkedin.com and
+      developer.linkedin.com (probed 2026-08-13). The definitions in openapi/ are API Evangelist
+      derivations from the published documentation, not provider artifacts.
+  - id: graphql
+    name: GraphQL surface
+    conforms: partial
+    evidence: >-
+      POST https://api.linkedin.com/rest/graphql and /v2/graphql both return 401 rather than 404
+      (probed 2026-08-13), so a GraphQL surface exists but introspection is authentication-gated.
+      LinkedIn documents GraphQL query usage per-product but publishes no SDL.
+
+compliance:
+  published: true
+  source: https://security.linkedin.com/trust-and-compliance
+  certifications:
+    - name: ISO/IEC 27001
+      scope: Information Security Management System covering Learning, Marketing, Sales and Talent Solutions
+    - name: ISO/IEC 27018
+      scope: Protection of personally identifiable information in public cloud processing
+    - name: ISO 22301
+      scope: Business Continuity Management Systems
+      note: Certificate stated valid through May 2026
+    - name: SOC 2 Type II
+      scope: >-
+        LinkedIn Learning, Marketing, Sales and Talent Solutions, plus the Glint platform. Annual
+        report; most recent stated period ends 2025-09-30.
+      availability: Enterprise customers via the LinkedIn Smart Trust Center
+    - name: PCI DSS
+      scope: Payment card processing
+  privacy:
+    - GDPR
+    - CCPA
+  trust_center: https://linkedin.safebase.us/
+  note: >-
+    These are LinkedIn corporate/product certifications, not API-specific attestations. LinkedIn
+    publishes no API-level conformance certification and participates in no API-sector standards
+    body (no FAPI, no FHIR, no SCIM, no OData) — its APIs are proprietary product interfaces.
+
+not_applicable:
+  - fhir
+  - fapi
+  - psd2
+  - odata
+  - scim
+  - json:api

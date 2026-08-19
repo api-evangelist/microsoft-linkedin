@@ -1,0 +1,154 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/microsoft-linkedin-mcp.yml + openapi/
+description: >-
+  Crosswalk binding the candidate MCP tool set to the backing OpenAPI operations, so each tool
+  inherits a real input contract from the spec instead of a guessed one. Every row is high
+  confidence because the tools were derived one-for-one from the operations — there is no published
+  LinkedIn MCP server whose naming could diverge from ours. The interesting divergence here is on
+  the GraphQL side: LinkedIn operates a GraphQL surface that no REST operation in this repo covers,
+  and its schema is authentication-gated.
+surfaces:
+  openapi:
+    files:
+      - openapi/microsoft-linkedin-adaccounts-api-openapi.yml
+      - openapi/microsoft-linkedin-adaccountusers-api-openapi.yml
+      - openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml
+      - openapi/microsoft-linkedin-adcampaigns-api-openapi.yml
+      - openapi/microsoft-linkedin-adcreatives-api-openapi.yml
+    provider_published: false
+    note: >-
+      LinkedIn publishes no OpenAPI. These are API Evangelist definitions built from the published
+      documentation; provenance is recorded in openapi/_original/.
+  graphql:
+    endpoints:
+      - https://api.linkedin.com/rest/graphql
+      - https://api.linkedin.com/v2/graphql
+    gated: true
+    probe: POST introspection returned HTTP 401 on both endpoints (2026-08-13)
+    note: >-
+      A GraphQL surface demonstrably exists (401, not 404) but introspection requires an access
+      token, so no SDL was captured and nothing is asserted about its fields.
+  mcp:
+    url: null
+    gated: false
+    note: No MCP server exists. Nothing to introspect; the tool list is a candidate.
+crosswalk:
+  - tool: search_ad_accounts
+    category: accounts
+    rest: [adAccounts_search]
+    binding: rest
+    confidence: high
+  - tool: create_ad_account
+    category: accounts
+    rest: [adAccounts_create]
+    binding: rest
+    confidence: high
+    note: >-
+      Batch creation is the same operation with X-RestLi-Method: BATCH_CREATE, so one tool fans out
+      to two behaviours depending on a header the spec does not model as a parameter.
+  - tool: get_ad_account
+    category: accounts
+    rest: [adAccounts_get]
+    binding: rest
+    confidence: high
+  - tool: update_ad_account
+    category: accounts
+    rest: [adAccounts_update]
+    binding: rest
+    confidence: high
+    note: >-
+      POST with a {"patch":{"$set":{...}}} body plus the X-RestLi-Method PARTIAL_UPDATE header.
+  - tool: delete_ad_account
+    category: accounts
+    rest: [adAccounts_delete]
+    binding: rest
+    confidence: high
+    note: >-
+      DELETE only applies to DRAFT accounts. Deleting a non-DRAFT account is a PARTIAL_UPDATE
+      setting status to PENDING_DELETION, which this tool does not cover.
+  - tool: find_ad_account_users
+    category: access
+    rest: [adAccountUsers_find]
+    binding: rest
+    confidence: high
+  - tool: search_campaign_groups
+    category: campaign-groups
+    rest: [adCampaignGroups_search]
+    binding: rest
+    confidence: high
+  - tool: create_campaign_group
+    category: campaign-groups
+    rest: [adCampaignGroups_create]
+    binding: rest
+    confidence: high
+  - tool: get_campaign_group
+    category: campaign-groups
+    rest: [adCampaignGroups_get]
+    binding: rest
+    confidence: high
+  - tool: update_campaign_group
+    category: campaign-groups
+    rest: [adCampaignGroups_update]
+    binding: rest
+    confidence: high
+  - tool: search_campaigns
+    category: campaigns
+    rest: [adCampaigns_search]
+    binding: rest
+    confidence: high
+  - tool: create_campaign
+    category: campaigns
+    rest: [adCampaigns_create]
+    binding: rest
+    confidence: high
+  - tool: get_campaign
+    category: campaigns
+    rest: [adCampaigns_get]
+    binding: rest
+    confidence: high
+  - tool: update_campaign
+    category: campaigns
+    rest: [adCampaigns_update]
+    binding: rest
+    confidence: high
+  - tool: search_creatives
+    category: creatives
+    rest: [adCreatives_search]
+    binding: rest
+    confidence: high
+  - tool: create_creative
+    category: creatives
+    rest: [adCreatives_create]
+    binding: rest
+    confidence: high
+  - tool: get_creative
+    category: creatives
+    rest: [adCreatives_get]
+    binding: rest
+    confidence: high
+mcp_only: []
+graphql_only:
+  - surface: LinkedIn GraphQL
+    reason: >-
+      LinkedIn routes several newer Marketing and Community Management reads through
+      /rest/graphql with product-specific queries. None of those are represented by a REST
+      operation in this repo, and the schema could not be introspected (HTTP 401), so the
+      capability is recorded as a known divergence rather than enumerated.
+rest_only:
+  - capability: non-draft account deletion
+    operations: [adAccounts_update]
+    reason: >-
+      Setting status to PENDING_DELETION is a distinct workflow with a different consequence class
+      than delete_ad_account and deserves its own tool if a server is ever built.
+coverage:
+  tools_named: 17
+  tools_bound: 17
+  mcp_only: 0
+  graphql_only_surfaces: 1
+  rest_ops_total: 17
+  rest_ops_with_tool: 17
+caveat: >-
+  This crosswalk describes a proposed surface. Because no LinkedIn MCP server exists, the tool
+  column is API Evangelist's naming, not LinkedIn's. Treat the rest column as authoritative and the
+  tool column as a proposal.

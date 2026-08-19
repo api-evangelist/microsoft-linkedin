@@ -1,0 +1,97 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-accounts
+description: >-
+  LinkedIn's sandbox is not a separate environment and not a separate host. There is no
+  sandbox.linkedin.com, no test-mode key prefix, and no test-vs-live credential pair. Instead the
+  production Marketing API carries an immutable per-entity `test` flag: an ad account created with
+  test:true becomes a test account on the live API, and every campaign group, campaign and creative
+  created under it inherits the flag. Test creatives are never served and never billed.
+docs:
+  - https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-accounts
+  - https://learn.microsoft.com/en-us/linkedin/marketing/quick-start
+model: in-production-flag
+separate_host: false
+separate_credentials: false
+key_prefixes: none
+mechanism:
+  field: test
+  type: boolean
+  default: false
+  set_on: create only
+  mutable: false
+  inherited_by_children: true
+  entities:
+    - adAccounts
+    - adCampaignGroups
+    - adCampaigns
+    - adCreatives
+  create_example:
+    method: POST
+    path: /rest/adAccounts
+    body_fragment: '{"currency": "USD", "name": "NAME_OF_T_ACCOUNT", "reference": "urn:li:organization:2414183", "type": "BUSINESS", "test": true}'
+  search_filter:
+    param: search.test
+    values:
+      - 'true'
+      - 'false'
+    note: >-
+      Finders return BOTH test and non-test entities unless explicitly filtered. This is a real
+      production hazard — a reporting integration that does not pass search.test=false will mix
+      test entities into live results.
+limits:
+  test_accounts_per_application: 1
+  account_type: BUSINESS only
+  enterprise_supported: false
+  campaign_manager_ui: not creatable in Campaign Manager; API only
+behaviors:
+  - Creatives created under a test account are never served in production.
+  - Creatives under a test account are auto-rejected in the review process.
+  - Test campaigns require no billing details and incur no cost; no credit card is needed.
+  - No reporting data is available from /adAnalytics for test campaigns because no impressions occur.
+  - Audience segment upload is not supported for test accounts.
+  - Campaigns under a test account are not publicly available and cannot be duplicated into a production account.
+errors:
+  - scenario: Creating a test enterprise account
+    message: /test cannot be set to true if /type is set to ENTERPRISE
+    reason: CONDITIONAL_INVALID_VALUE
+    type: INVALID_VALUE
+  - scenario: Creating more than one test account per app
+    message: >-
+      Cannot create another test account. Each developer application may have a maximum of 1 test
+      account(s) associated with it
+    reason: TEST_ACCOUNT_LIMIT_REACHED
+    type: INVALID_VALUE
+  - scenario: Batch creating more than one test account per app
+    message: >-
+      Batch create request of 2 test accounts failed. Each developer application may have a maximum
+      of 1 test account(s) associated with it
+    reason: BATCH_CREATION_TEST_ACCOUNTS_CROSSING_LIMIT
+    type: ACTION_NOT_ALLOWED
+  - scenario: Uploading an audience under a test account
+    message: Segment creation is not supported for test accounts
+    reason: SEGMENT_CREATION_NOT_ALLOWED_FOR_TEST_ACCOUNTS
+    type: ACTION_NOT_ALLOWED
+  - scenario: Converting an existing account to a test account
+    message: Attempted to change the value of an un-editable field.
+    type: FIELD_NOT_EDITABLE
+  - scenario: Passing the test flag when creating a campaign
+    message: Field is not allowed on creation.
+    type: FIELD_NOT_ALLOWED
+    note: The flag is inherited from the parent account; it must not be set on child entities.
+token_tooling:
+  - name: Token Generator
+    location: LinkedIn Developer Portal, app > Auth tab
+    url: https://www.linkedin.com/developers/apps
+    description: Generates a member access token for testing without implementing the full OAuth flow.
+  - name: LinkedIn Marketing Solutions Postman workspace
+    url: https://www.postman.com/linkedin-developer-apis/workspace/linkedin-marketing-solutions-versioned-apis/overview
+    description: Provider-published Postman workspace for the versioned Marketing APIs.
+gaps:
+  - >-
+    No sandbox exists outside the Marketing surface. The Consumer, Talent, Sales and Learning APIs
+    have no test-mode equivalent — integration testing there runs against live member data.
+  - No mock server, no fixture generator, no time-simulation/test-clock tooling.
+  - >-
+    Because test entities live in production and finders include them by default, isolation is a
+    convention the caller must maintain rather than an environment boundary the platform enforces.

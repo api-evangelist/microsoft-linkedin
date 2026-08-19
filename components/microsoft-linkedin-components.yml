@@ -1,0 +1,105 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/plugins
+description: >-
+  LinkedIn's client-side embeddable surface is its Plugins family — drop-in JavaScript widgets that
+  put LinkedIn functionality on a third-party page without an API integration. They are governed by
+  a separate Plugins Terms of Use rather than the API Terms of Use, and they predate the modern
+  platform: the loader script and the custom script-type embedding style have not changed since the
+  original LinkedIn developer platform, and the documentation pages carry ms.date values from
+  2018-2019.
+terms: https://developer.linkedin.com/legal/plugin-terms-of-use
+loaders:
+  - name: LinkedIn platform JavaScript
+    src: https://platform.linkedin.com/in.js
+    registry: cdn
+    version: null
+    version_note: >-
+      The loader URL is unpinned and floats to whatever LinkedIn currently serves. There is no
+      version in the path, no integrity attribute in the documented snippet, and no CDN metadata
+      endpoint to query — a consumer cannot tell which build they are executing, and neither can we.
+    config_style: >-
+      Configuration is passed as the script element's text content (e.g. "lang: en_US"), not as
+      attributes — an idiom specific to this loader.
+    parameters:
+      - name: lang
+        example: en_US
+families:
+  - name: Sharing
+    components:
+      - name: Share
+        embed_type: IN/Share
+        docs: https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/plugins/share-plugin
+        description: >-
+          Renders a LinkedIn Share button that opens the share composer for the referenced URL.
+          Leaving data-url blank lets the member compose their own share.
+        attributes:
+          - name: data-url
+            required: false
+            example: https://www.linkedin.com
+        snippet: |
+          <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+          <script type="IN/Share" data-url="https://www.linkedin.com"></script>
+  - name: Company
+    components:
+      - name: Follow Company
+        embed_type: IN/FollowCompany
+        docs: https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/plugins/follow-company-plugin
+        description: >-
+          Renders a follow widget for a LinkedIn company page. The company id is the numeric segment
+          of the page admin URL (https://www.linkedin.com/company/{id}/admin/).
+        attributes:
+          - name: data-id
+            required: true
+            description: Numeric LinkedIn company page id.
+          - name: data-counter
+            required: false
+            values:
+              - top
+              - bottom
+        snippet: |
+          <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+          <script type="IN/FollowCompany" data-id="0000" data-counter="bottom"></script>
+  - name: Forms and hiring
+    components:
+      - name: LinkedIn AutoFill
+        docs: https://www.linkedin.com/help/lms/answer/a424393
+        description: >-
+          Prefills a form on an advertiser's site with the member's LinkedIn profile data. Listed as
+          a plugin in the LinkedIn plugin index but documented in the LinkedIn help centre rather
+          than on Microsoft Learn.
+        note: >-
+          Documented outside the developer docs, so no embed snippet is captured here. Configured
+          through Campaign Manager and the advertiser's site.
+      - name: Apply with LinkedIn
+        product_catalog: https://developer.linkedin.com/product-catalog
+        description: >-
+          Lets a candidate apply to a job using their LinkedIn profile. Listed in LinkedIn's product
+          catalog under Talent, and gated behind a Talent Solutions partner relationship rather than
+          published as a self-serve snippet.
+        self_serve: false
+      - name: Add to Profile
+        product_catalog: https://developer.linkedin.com/product-catalog
+        description: >-
+          Lets a member add a certification or credential to their LinkedIn profile from an issuing
+          site.
+        self_serve: false
+retired:
+  - name: Sign In with LinkedIn button (IN/Login)
+    note: >-
+      The old in.js-rendered login button is superseded by Sign In with LinkedIn using OpenID
+      Connect, which is a standard OIDC flow rather than a plugin. See
+      well-known/microsoft-linkedin-openid-configuration.json.
+gaps:
+  - >-
+    Only two of the plugins (Share, Follow Company) have a documented, self-serve embed snippet.
+    The rest are partner-gated or documented in the help centre.
+  - >-
+    No npm package, no ES module, no web components, and no framework bindings. Embedding is a
+    global script tag with proprietary script types.
+  - >-
+    The loader is unpinned with no published integrity hash, so an embedding site has no way to
+    verify or freeze what it loads.
+  - >-
+    No embedded dashboards or hosted UI surfaces for the Marketing or Talent APIs — Campaign Manager
+    and Recruiter are LinkedIn-hosted products, not embeddable components.

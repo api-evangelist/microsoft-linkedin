@@ -1,0 +1,118 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for LinkedIn Marketing AdAccounts AdCampaignGroups API
+  version: 1.0.0
+extends: openapi/microsoft-linkedin-adcampaigngroups-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: https://learn.microsoft.com/en-us/linkedin/ + repository artifacts
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the runtime facts a caller must know before the first
+    call.
+  update:
+    x-apievangelist-provenance:
+      source: API Evangelist derivation from https://learn.microsoft.com/en-us/linkedin/marketing/
+      provider-published-openapi: false
+      generated: '2026-08-13'
+    x-linkedin-required-headers:
+      Linkedin-Version: YYYYMM, required on every /rest/ call; current 202607; no default is applied
+      X-Restli-Protocol-Version: 2.0.0
+    x-api-evangelist-artifacts:
+      conventions: conventions/microsoft-linkedin-conventions.yml
+      errors: errors/microsoft-linkedin-problem-types.yml
+      rate-limits: rate-limits/microsoft-linkedin-rate-limits.yml
+      lifecycle: lifecycle/microsoft-linkedin-lifecycle.yml
+      data-model: data-model/microsoft-linkedin-data-model.yml
+      sandbox: sandbox/microsoft-linkedin-sandbox.yml
+- target: $.info
+  description: Record the platform-wide runtime gaps agents must compensate for.
+  update:
+    x-idempotency:
+      supported: false
+      note: No idempotency key. A retried create duplicates; dedupe client-side.
+    x-rate-limit-signaling:
+      headers: null
+      status: 429
+      retry_after: false
+      note: No RateLimit-* or Retry-After headers are returned; quota is only visible in the Developer
+        Portal Analytics tab.
+    x-error-envelope:
+      format: proprietary-json
+      rfc9457: false
+      fields:
+      - message
+      - serviceErrorCode
+      - status
+- target: $.servers
+  description: Annotate the production server with the two base paths LinkedIn operates.
+  update:
+  - url: https://api.linkedin.com
+    description: LinkedIn API production
+    x-base-paths:
+      versioned: /rest/
+      unversioned: /v2/
+- target: $.paths['/rest/adAccounts/{adAccountID}/adCampaignGroups'].get
+  description: Add the shared error responses LinkedIn documents but the specification does not enumerate
+    for adCampaignGroups_search.
+  update:
+    x-documented-errors:
+    - 400
+    - 401
+    - 403
+    - 404
+    - 405
+    - 411
+    - 426
+    - 429
+    - 500
+    - 504
+    x-error-catalog: errors/microsoft-linkedin-problem-types.yml
+- target: $.paths['/rest/adAccounts/{adAccountID}/adCampaignGroups'].post
+  description: Add the shared error responses LinkedIn documents but the specification does not enumerate
+    for adCampaignGroups_create.
+  update:
+    x-documented-errors:
+    - 400
+    - 401
+    - 403
+    - 404
+    - 405
+    - 411
+    - 426
+    - 429
+    - 500
+    - 504
+    x-error-catalog: errors/microsoft-linkedin-problem-types.yml
+- target: $.paths['/rest/adAccounts/{adAccountID}/adCampaignGroups/{campaignGroupID}'].get
+  description: Add the shared error responses LinkedIn documents but the specification does not enumerate
+    for adCampaignGroups_get.
+  update:
+    x-documented-errors:
+    - 400
+    - 401
+    - 403
+    - 404
+    - 405
+    - 411
+    - 426
+    - 429
+    - 500
+    - 504
+    x-error-catalog: errors/microsoft-linkedin-problem-types.yml
+- target: $.paths['/rest/adAccounts/{adAccountID}/adCampaignGroups/{campaignGroupID}'].post
+  description: Add the shared error responses LinkedIn documents but the specification does not enumerate
+    for adCampaignGroups_update.
+  update:
+    x-documented-errors:
+    - 400
+    - 401
+    - 403
+    - 404
+    - 405
+    - 411
+    - 426
+    - 429
+    - 500
+    - 504
+    x-error-catalog: errors/microsoft-linkedin-problem-types.yml

@@ -1,0 +1,186 @@
+generated: '2026-08-13'
+method: searched
+source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/pagination
+description: >-
+  Cross-cutting runtime semantics for the LinkedIn APIs. LinkedIn's public API is a Rest.li 2.0.0
+  surface, so most conventions here are Rest.li protocol conventions rather than REST/HTTP idioms:
+  finders and batch methods are expressed as query parameters on a collection, partial updates are
+  POSTs with a patch body, and entity references are URNs rather than opaque ids.
+docs:
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/pagination
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/error-handling
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits
+  - https://learn.microsoft.com/en-us/linkedin/marketing/versioning
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/methods
+  - https://learn.microsoft.com/en-us/linkedin/shared/api-guide/webhook-validation
+
+base_urls:
+  versioned: https://api.linkedin.com/rest/
+  unversioned: https://api.linkedin.com/v2/
+  note: >-
+    The versioned Marketing surface lives under /rest/ and has required version headers. The older
+    /v2/ surface is unversioned and is what the Consumer APIs and userinfo still use.
+
+auth:
+  style: oauth2-bearer
+  header: 'Authorization: Bearer {access_token}'
+  flows:
+    - authorization_code
+    - client_credentials
+  note: >-
+    3-legged (member) tokens and 2-legged (application) tokens both present as Bearer tokens.
+    See authentication/microsoft-linkedin-authentication.yml and scopes/microsoft-linkedin-scopes.yml.
+
+versioning:
+  style: header
+  headers:
+    - name: Linkedin-Version
+      format: YYYYMM
+      required: true
+      example: '202607'
+      note: >-
+        Required on every call to the versioned /rest/ surface. LinkedIn applies no default — a
+        missing version header is an error, and a sunset version returns 426.
+    - name: X-Restli-Protocol-Version
+      value: 2.0.0
+      required: true
+      note: Selects the Rest.li 2.0.0 protocol encoding for URNs, projections, and batch keys.
+  latest_version: '202607'
+  cadence: monthly
+  support_window: minimum 12 months per version
+  cross_link: lifecycle/microsoft-linkedin-lifecycle.yml
+
+pagination:
+  style: offset
+  params:
+    - name: start
+      description: Index of the first item to return.
+      default: 0
+    - name: count
+      description: Number of items per page. Fewer may be returned than requested.
+      default: 10
+  response_fields:
+    elements: array of results
+    paging: object carrying the echoed start and count
+    'paging.links': navigation links where the resource provides them
+  end_of_dataset: >-
+    A page containing fewer elements than the requested count indicates the end of the dataset.
+    LinkedIn does not guarantee a total count on every resource.
+  note: >-
+    Several newer Marketing resources have moved to a page-token style; where a resource documents
+    pageSize/pageToken, that supersedes start/count for that resource.
+
+field_selection:
+  style: rest.li projections
+  param: fields
+  description: >-
+    Rest.li field projections let a caller request a subtree of the response, including nested
+    projections, e.g. ?fields=id,name,changeAuditStamps(created~). Not all resources honour every
+    projection.
+  decoration: >-
+    A trailing tilde on a URN field (field~) decorates the reference with the referenced entity,
+    which is LinkedIn's equivalent of expansion.
+
+request_methods:
+  header: X-RestLi-Method
+  values:
+    - GET
+    - BATCH_GET
+    - CREATE
+    - BATCH_CREATE
+    - PARTIAL_UPDATE
+    - BATCH_PARTIAL_UPDATE
+    - DELETE
+    - BATCH_DELETE
+    - FINDER
+    - ACTION
+  note: >-
+    Rest.li overloads HTTP POST. A partial update is a POST with a {"patch":{"$set":{...}}} body,
+    and batch variants are selected with the X-RestLi-Method header rather than a distinct path.
+    This is why the OpenAPI in openapi/ shows POST where a REST API would show PATCH.
+
+identifiers:
+  style: urn
+  format: 'urn:li:{entityType}:{id}'
+  examples:
+    - 'urn:li:sponsoredAccount:123212321'
+    - 'urn:li:organization:1234'
+    - 'urn:li:person:AbC123'
+  note: >-
+    URNs are the primary entity reference across every LinkedIn API. They must be URL-encoded when
+    used in a path segment. See data-model/microsoft-linkedin-data-model.yml.
+
+idempotency:
+  supported: false
+  request_key_header: null
+  note: >-
+    LinkedIn documents no idempotency key for write requests. There is no Idempotency-Key header,
+    no request-replay window, and no documented dedupe of repeated CREATE calls — a retried POST to
+    a collection creates a second entity. The one deduplication requirement LinkedIn does publish
+    runs the other direction: webhook consumers MUST deduplicate inbound notifications using the
+    Notification ID in the payload, because LinkedIn may deliver the same notification more than
+    once. Callers needing safe retries have to implement their own client-side dedupe keyed on a
+    business identifier.
+  consumer_side_dedupe:
+    surface: webhooks
+    key: Notification ID in the notification payload
+    source: https://learn.microsoft.com/en-us/linkedin/shared/api-guide/webhook-validation
+
+request_tracing:
+  headers:
+    - x-li-uuid
+    - x-li-fabric
+    - x-li-request-id
+  note: >-
+    LinkedIn returns these on responses and asks that they be captured and quoted when reporting a
+    500 Internal Server Error to developer support. They are response-only; there is no documented
+    client-supplied correlation header.
+
+error_envelope:
+  format: proprietary-json
+  rfc9457: false
+  content_type: application/json
+  fields:
+    message: Human-readable description of the error.
+    serviceErrorCode: LinkedIn subcode further classifying the error.
+    status: HTTP status code, repeated in the body.
+  example: |
+    {
+        "message": "Empty oauth2_access_token",
+        "serviceErrorCode": 401,
+        "status": 401
+    }
+  cross_link: errors/microsoft-linkedin-problem-types.yml
+
+rate_limit_signaling:
+  status_on_exhaustion: 429
+  headers: none
+  note: >-
+    LinkedIn publishes no RateLimit-* or X-RateLimit-* response headers and no Retry-After on 429.
+    Remaining quota is only observable out-of-band, in the Analytics tab of the app in the
+    Developer Portal. This is the largest runtime-semantics gap in the LinkedIn API surface: an
+    agent cannot tell from a response how close it is to a limit.
+  cross_link: rate-limits/microsoft-linkedin-rate-limits.yml
+
+webhooks:
+  supported: true
+  signature_header: X-LI-Signature
+  algorithm: HMAC-SHA256 over "hmacsha256=" + raw JSON body, keyed by the app clientSecret, lowercase hex
+  validation: >-
+    Endpoint ownership is proved by a challengeCode/challengeResponse handshake before registration,
+    re-validated every 2 hours; three consecutive failures block the endpoint.
+  expected_response: 2xx
+  transport: HTTPS only
+  cross_link: asyncapi/microsoft-linkedin-webhooks.yml
+
+content_types:
+  request: application/json
+  response: application/json
+
+cross_links:
+  authentication: authentication/microsoft-linkedin-authentication.yml
+  scopes: scopes/microsoft-linkedin-scopes.yml
+  errors: errors/microsoft-linkedin-problem-types.yml
+  lifecycle: lifecycle/microsoft-linkedin-lifecycle.yml
+  rate_limits: rate-limits/microsoft-linkedin-rate-limits.yml
+  data_model: data-model/microsoft-linkedin-data-model.yml

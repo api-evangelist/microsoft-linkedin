@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source: https://security.linkedin.com/trust-and-compliance
+description: >-
+  LinkedIn runs its own trust and compliance surface at security.linkedin.com, separate from the
+  Microsoft Trust Center, plus a gated SafeBase-powered "Smart Trust Center" where enterprise
+  customers request the actual audit reports.
+trust_center:
+  public_page:
+    url: https://security.linkedin.com/trust-and-compliance
+    status: 200
+    probed: '2026-08-13'
+  gated_portal:
+    url: https://linkedin.safebase.us/
+    name: LinkedIn Smart Trust Center
+    platform: SafeBase
+    status: 403
+    probed: '2026-08-13'
+    access: account required; reports available to LinkedIn Enterprise customers
+    note: >-
+      Returns 403 to an anonymous probe. The certifications below are read from the public
+      security.linkedin.com page, not from behind the portal.
+  parent_company:
+    name: Microsoft Trust Center
+    url: https://www.microsoft.com/en-us/trust-center
+    note: LinkedIn maintains its own program; the Microsoft Trust Center is not the source of these claims.
+certifications:
+  - name: ISO/IEC 27001
+    type: certification
+    scope: Information Security Management System — Learning, Marketing, Sales, Talent Solutions
+  - name: ISO/IEC 27018
+    type: certification
+    scope: PII protection for public cloud processors
+  - name: ISO 22301
+    type: certification
+    scope: Business Continuity Management Systems
+    validity: stated valid through May 2026
+  - name: SOC 2 Type II
+    type: audit report
+    scope: LinkedIn Learning, Marketing, Sales, Talent Solutions and the Glint platform
+    period: 12 months ending 2025-09-30
+    availability: request via the Smart Trust Center (enterprise customers)
+  - name: PCI DSS
+    type: compliance program
+    scope: Payment card processing
+privacy_programs:
+  - GDPR
+  - CCPA
+policies:
+  privacy_policy: https://www.linkedin.com/legal/privacy-policy
+  api_terms: https://www.linkedin.com/legal/l/api-terms-of-use
+  transparency_center: https://security.linkedin.com/trust-and-compliance
+evidence:
+  - url: https://security.linkedin.com/trust-and-compliance
+    status: 200
+    kind: public trust and compliance page naming each certification
+  - url: https://linkedin.safebase.us/
+    status: 403
+    kind: gated trust portal (SafeBase)

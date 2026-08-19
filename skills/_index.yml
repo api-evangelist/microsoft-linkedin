@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: generated
+source: openapi/ + https://learn.microsoft.com/en-us/linkedin/
+provider: Microsoft LinkedIn
+providerId: microsoft-linkedin
+description: >-
+  Packaged Agent Skills for the LinkedIn Marketing API, grounded in the operationIds present in this
+  repository's OpenAPI definitions plus the platform conventions LinkedIn publishes. LinkedIn does
+  not publish an AGENTS.md or its own skills; these are API Evangelist generations. Every operationId
+  referenced was verified against openapi/ — none is invented.
+searched_for_provider_skills:
+  result: none published
+  probes:
+    - url: https://developer.linkedin.com/llms.txt
+      status: 404
+    - url: https://www.linkedin.com/llms.txt
+      status: 404
+    - url: https://api.linkedin.com/.well-known/agent-card.json
+      status: 404
+skills:
+  - name: microsoft-linkedin-launch-ad-campaign
+    file: skills/microsoft-linkedin-launch-ad-campaign.md
+    summary: >-
+      Build the full account → campaign group → campaign → creative hierarchy against a test ad
+      account, with the Rest.li header and patch-body rules that trip up first integrations.
+    operations:
+      - adAccounts_create
+      - adAccounts_get
+      - adCampaignGroups_create
+      - adCampaigns_create
+      - adCreatives_create
+  - name: microsoft-linkedin-audit-ad-account-access
+    file: skills/microsoft-linkedin-audit-ad-account-access.md
+    summary: >-
+      Enumerate reachable ad accounts, read servingStatuses to explain non-delivery, and audit the
+      role assignments on each account — with the search.test filter that keeps test data out of a
+      production audit.
+    operations:
+      - adAccounts_search
+      - adAccounts_get
+      - adAccountUsers_find
+  - name: microsoft-linkedin-migrate-api-version
+    file: skills/microsoft-linkedin-migrate-api-version.md
+    summary: >-
+      Move off a sunset Linkedin-Version, read the breaking changes in every release being skipped,
+      validate against a test account, and instrument for the next twelve-month clock.
+    operations:
+      - adAccounts_search
+      - adAccounts_get
+coverage:
+  operations_in_repo: 17
+  operations_referenced: 10
+  note: >-
+    The three skills cover the marquee flows. The remaining update/delete/search operations are
+    reachable through the conventions documented in conventions/microsoft-linkedin-conventions.yml
+    rather than needing a skill each.
