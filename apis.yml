@@ -34,7 +34,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/microsoft-linkedin/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-08-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: microsoft-linkedin:marketing-api
   name: LinkedIn Marketing API
