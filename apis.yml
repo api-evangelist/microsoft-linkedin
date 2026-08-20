@@ -41,6 +41,10 @@ apis:
   tags:
   - Advertising
   - Marketing
+  - Social-Media
+  tags_raw:
+  - Advertising
+  - Marketing
   - Social Media
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.linkedin.com/v2/
@@ -90,6 +94,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
+  - Ad Accounts
+  tags_raw:
   - AdAccounts
   properties:
   - type: OpenAPI
@@ -126,6 +132,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
+  - Ad Campaigns
+  tags_raw:
   - AdCampaigns
   properties:
   - type: OpenAPI
@@ -138,6 +146,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
+  - Ad Creatives
+  tags_raw:
   - AdCreatives
   properties:
   - type: OpenAPI
