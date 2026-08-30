@@ -106,7 +106,7 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
-  - Ad Accounts
+  - AdAccounts
   tags_raw:
   - AdAccounts
   properties:
@@ -132,6 +132,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
+  - Ad Campaign Groups
+  tags_raw:
   - AdCampaignGroups
   properties:
   - type: OpenAPI
@@ -144,7 +146,7 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
-  - Ad Campaigns
+  - AdCampaigns
   tags_raw:
   - AdCampaigns
   properties:
@@ -158,7 +160,7 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/linkedin/marketing/
   baseURL: https://api.linkedin.com/v2/
   tags:
-  - Ad Creatives
+  - AdCreatives
   tags_raw:
   - AdCreatives
   properties:
